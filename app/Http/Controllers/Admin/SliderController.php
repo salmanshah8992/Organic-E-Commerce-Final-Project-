@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use Illuminate\Notifications\Notification;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Slider;
@@ -18,7 +18,6 @@ class SliderController extends Controller
 
      // slider store
    public function SliderStore(Request $request){
-
     $request->validate([
         'title_name_en' => 'required',
         'title_name_bn' => 'required',
@@ -56,14 +55,12 @@ class SliderController extends Controller
 
     public function SliderUpdate(Request $request){
 
-        // dd($request->all());
-
         $id = $request->id;
         $old_img = $request->old_img;
 
-        if ($request->file('image')) {
+        if ($request->file('slider_image')) {
              unlink($old_img);
-             $image = $request->file('image');
+             $image = $request->file('slider_image');
              $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
              Image::make($image)->resize(870,370)->save('uploads/slider/'.$name_gen);
              $save_url = 'uploads/slider/'.$name_gen;
@@ -77,7 +74,8 @@ class SliderController extends Controller
                 'updated_at' => Carbon::now(),
              ]);
 
-             return Redirect()->route('sliders')->with($notification);
+             Toastr::success('Slider updated successfully:)','Success');
+             return Redirect()->route('all.sliders');
         }else {
             Slider::findOrFail($id)->update([
                 'title_en' => $request->title_name_en,

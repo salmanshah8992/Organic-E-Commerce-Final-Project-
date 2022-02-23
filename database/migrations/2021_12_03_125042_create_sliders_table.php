@@ -24,7 +24,6 @@ class CreateSlidersTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

@@ -11,6 +11,11 @@ use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
 use App\Http\Responses\LoginResponse;
+use App\Models\Admin\Category;
+use App\Models\Admin\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
+use Illuminate\Support\Facades\DB;
 use Laravel\Fortify\Contracts\LoginViewResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Features;
@@ -33,15 +38,16 @@ class AdminController extends Controller
      * @return void
      */
 
-    
+
 
     public function __construct(StatefulGuard $guard)
     {
         $this->guard = $guard;
     }
 
-    public function loginForm(){
-    	return view('auth.login', ['guard' => 'admin']);
+    public function loginForm()
+    {
+        return view('auth.login', ['guard' => 'admin']);
     }
 
 
@@ -107,4 +113,41 @@ class AdminController extends Controller
 
         return app(LogoutResponse::class);
     }
-}
+
+    // chart ..pie chart
+    public function pieChart()
+    {
+        $categorywiseproduct = Category::withCount('products')->get();
+        //dd($categorywiseproduct);
+        return response($categorywiseproduct);
+    }
+
+    // chart ..donut chart
+    public function DoughnutChartOne()
+    {
+        $totalSellingProduct = OrderItem::sum('qty');
+        $totalCurrentStock = Product::sum('product_qty');
+
+        $doughnutChart = [$totalSellingProduct, $totalCurrentStock];
+        return response($doughnutChart);
+    }
+
+    // chart ... bar chart
+    public function barChart()
+    {
+        $totalSale = Order::where('status', '2')
+            ->whereYear("created_at", date("Y"))
+            ->select(
+                DB::raw("(count(status)) as total "),
+                DB::raw("(DATE_FORMAT(created_at, '%m')) as my_date ")
+            )
+            ->orderBy(
+                "my_date",
+                "ASC"
+            )
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m')"))
+            ->pluck('total', 'my_date');
+
+        return response($totalSale);
+    }
+}//main

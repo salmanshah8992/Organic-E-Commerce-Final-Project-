@@ -5,11 +5,12 @@
 		<!-- Basic Page Needs -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>FreshMart - Organic, Fresh Food, Farm Store HTML Template</title>
+		<title>Organic E-Commerce</title>
 
 		<meta name="keywords" content="Organic, Fresh Food, Farm Store">
 		<meta name="description" content="FreshMart - Organic, Fresh Food, Farm Store HTML Template">
 		<meta name="author" content="tivatheme">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{{ asset('frontend') }}/img/favicon.png" type="image/png">
@@ -34,6 +35,12 @@
 		<!-- Template CSS -->
 		<link rel="stylesheet" href="{{ asset('frontend') }}/css/style.css">
 		<link rel="stylesheet" href="{{ asset('frontend') }}/css/reponsive.css">
+        @yield('css')
+        <style>
+            .modal{
+                z-index: 9999;
+            }
+        </style>
 	</head>
 
 	<body class="home home-2">
@@ -48,10 +55,10 @@
 							<div class="col-md-7 col-sm-7 col-xs-12">
 								<div class="topbar-left d-flex">
 									<div class="email">
-										<i class="fa fa-envelope" aria-hidden="true"></i>Email: salmanshah8992@gmail.com
+										<i class="fa fa-envelope" aria-hidden="true"></i>Email: tivatheme@gmail.com
 									</div>
 									<div class="skype">
-										<i class="fa fa-skype" aria-hidden="true"></i>Skype: salmanshah8992
+										<i class="fa fa-skype" aria-hidden="true"></i>Skype: tivatheme
 									</div>
 								</div>
 							</div>
@@ -65,18 +72,37 @@
 											My Account
 										</div>
 										<div class="dropdown-menu">
+                                            @auth
+                                                <div class="item">
+                                                    <a href="{{ route('user.profile') }}" title="Log in to your customer account"><i class="fa fa-cog"></i>My Profile</a>
+                                                </div>
+                                                <div class="item d-flex">
+                                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                        <i class="fa fa-cog"></i>
+                                                        <form method="POST" action="{{ route('logout') }}">
+                                                            @csrf
+                                                            <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                                                                        onclick="event.preventDefault();
+                                                                            this.closest('form').submit();">
+                                                                {{ __('Log Out') }}
+                                                            </x-jet-responsive-nav-link>
+                                                        </form>
+                                                    </a>
+                                                </div>
+                                            @endauth
+                                            @guest
+                                                <div class="item">
+                                                    <a href="{{ url('/login') }}" title="Log in to your customer account"><i class="fa fa-sign-in"></i>Login</a>
+                                                </div>
+                                                <div class="item">
+                                                    <a href="{{ url('/register') }}" title="Register Account"><i class="fa fa-user"></i>Register</a>
+                                                </div>
+                                            @endguest
+                                            @auth
 											<div class="item">
-												<a href="#" title="Log in to your customer account"><i class="fa fa-cog"></i>My Account</a>
+												<a href="{{ route('view.wishlist') }}" title="My Wishlists"><i class="fa fa-heart"></i>My Wishlists</a>
 											</div>
-											<div class="item">
-												<a href="user-login.html" title="Log in to your customer account"><i class="fa fa-sign-in"></i>Login</a>
-											</div>
-											<div class="item">
-												<a href="user-register.html" title="Register Account"><i class="fa fa-user"></i>Register</a>
-											</div>
-											<div class="item">
-												<a href="#" title="My Wishlists"><i class="fa fa-heart"></i>My Wishlists</a>
-											</div>
+                                            @endauth
 										</div>
 									</div>
 
@@ -102,7 +128,7 @@
 										</div>
 										<div class="dropdown-menu">
 											<div class="item">
-												<a href="#" title="USD">BD</a>
+												<a href="#" title="USD">USD</a>
 											</div>
 											<div class="item">
 												<a href="#" title="EUR">EUR</a>
@@ -125,7 +151,7 @@
 							<div class="col-lg-2 col-md-2 col-sm-12 padding-0">
 								<!-- Logo -->
 								<div class="logo">
-									<a href="home-2.html">
+									<a href="{{ url('/') }}">
 										<img class="img-responsive" src="{{ asset('frontend') }}/img/logo.png" alt="Logo">
 									</a>
 								</div>
@@ -178,67 +204,6 @@
 											</div>
 										</li>
 
-										<li class="dropdown">
-											<a href="#" title="Page">Page</a>
-											<div class="dropdown-menu">
-												<ul>
-													<li class="dropdown-submenu">
-														<a href="product-grid-left-sidebar.html" title="Product List">Product List</a>
-														<div class="dropdown-menu level2">
-															<ul>
-																<li><a href="product-grid-left-sidebar.html" title="Product Grid - Left Sidebar">Product Grid - Left Sidebar</a></li>
-																<li><a href="product-grid-right-sidebar.html" title="Product Grid - Right Sidebar">Product Grid - Right Sidebar</a></li>
-																<li><a href="product-grid-full-width.html" title="Product Grid - Full Width">Product Grid - Full Width</a></li>
-																<li><a href="product-list-left-sidebar.html" title="Product List - Left Sidebar">Product List - Left Sidebar</a></li>
-															</ul>
-														</div>
-													</li>
-													<li class="dropdown-submenu">
-														<a href="product-detail-left-sidebar.html" title="Product List">Product Detail</a>
-														<div class="dropdown-menu level2">
-															<ul>
-																<li><a href="product-detail-left-sidebar.html" title="Product Detail - Left Sidebar">Product Detail - Left Sidebar</a></li>
-																<li><a href="product-detail-full-width-1.html" title="Product List - Full Width 1">Product Detail - Full Width 1</a></li>
-																<li><a href="product-detail-full-width-2.html" title="Product List - Full Width 2">Product Detail - Full Width 2</a></li>
-															</ul>
-														</div>
-													</li>
-													<li>
-														<a href="product-cart.html" title="Cart">Cart</a>
-													</li>
-													<li>
-														<a href="product-checkout.html" title="Checkout">Checkout</a>
-													</li>
-													<li class="dropdown-submenu">
-														<a href="#" title="User">User</a>
-														<div class="dropdown-menu level2">
-															<ul>
-																<li><a href="user-login.html" title="Login">Login</a></li>
-																<li><a href="user-register.html" title="Register">Register</a></li>
-																<li><a href="#" title="My Account">My Account</a></li>
-																<li><a href="#" title="My Wishlists">My Wishlists</a></li>
-															</ul>
-														</div>
-													</li>
-													<li>
-														<a href="page-404.html" title="Page 404">Page 404</a>
-													</li>
-												</ul>
-											</div>
-										</li>
-
-										<li class="dropdown">
-											<a href="blog-list-left-sidebar-1.html">Blog</a>
-											<div class="dropdown-menu">
-												<ul class="has-sub">
-													<li><a href="blog-list-left-sidebar-1.html" title="Blog List - Left Sidebar 1">Blog List - Left Sidebar 1</a></li>
-													<li><a href="blog-list-left-sidebar-2.html" title="Blog List - Left Sidebar 2">Blog List - Left Sidebar 2</a></li>
-													<li><a href="blog-grid-full-width.html" title="Blog Grid - Full Width">Blog Grid - Full Width</a></li>
-													<li><a href="blog-detail.html" title="Blog Detail">Blog Detail</a></li>
-												</ul>
-											</div>
-										</li>
-
 										<li>
 											<a href="page-about-us.html">About Us</a>
 										</li>
@@ -255,65 +220,26 @@
 								<div class="block-cart dropdown">
 									<div class="cart-title">
 										<i class="fa fa-shopping-basket"></i>
-										<span class="cart-count">2</span>
+										<span class="cart-count"><span class="count" id="cartQty"></span></span>
 									</div>
 
 									<div class="dropdown-content">
 										<div class="cart-content">
 											<table>
 												<tbody>
-													<tr>
-														<td class="product-image">
-															<a href="product-detail-left-sidebar.html">
-																<img src="{{ asset('frontend') }}/img/product/7.jpg" alt="Product">
-															</a>
-														</td>
-														<td>
-															<div class="product-name">
-																<a href="product-detail-left-sidebar.html">Organic Strawberry Fruits</a>
-															</div>
-															<div>
-																2 x <span class="product-price">$28.98</span>
-															</div>
-														</td>
-														<td class="action">
-															<a class="remove" href="#">
-																<i class="fa fa-trash-o" aria-hidden="true"></i>
-															</a>
-														</td>
-													</tr>
+                                                    <tr id="miniCart">
 
-													<tr>
-														<td class="product-image">
-															<a href="product-detail-left-sidebar.html">
-																<img src="{{ asset('frontend') }}/img/product/6.jpg" alt="Product">
-															</a>
-														</td>
-														<td>
-															<div class="product-name">
-																<a href="product-detail-left-sidebar.html">Organic Strawberry</a>
-															</div>
-															<div>
-																1 x <span class="product-price">$35.00</span>
-															</div>
-														</td>
-														<td class="action">
-															<a class="remove" href="#">
-																<i class="fa fa-trash-o" aria-hidden="true"></i>
-															</a>
-														</td>
-													</tr>
-
+                                                    </tr>
 													<tr class="total">
 														<td>Total:</td>
-														<td colspan="2">$92.96</td>
+														<td colspan="2"><span class="sign">$</span><span class="value" id="cartSubTotal"></span></td>
 													</tr>
 
 													<tr>
 														<td colspan="3">
 															<div class="cart-button">
-																<a class="btn btn-primary" href="product-cart.html" title="View Cart">View Cart</a>
-																<a class="btn btn-primary" href="product-checkout.html" title="Checkout">Checkout</a>
+																<a class="btn btn-primary" href="{{ route('view.cart') }}" title="View Cart">View Cart</a>
+																<a class="btn btn-primary" href="{{ route('checkout') }}" title="Checkout">Checkout</a>
 															</div>
 														</td>
 													</tr>
@@ -479,6 +405,12 @@
 			</div>
 		</div>
 
+
+        @include('frontend.modal')
+
+
+
+
 		<!-- Vendor JS -->
 		<script src="{{ asset('frontend') }}/libs/jquery/jquery.js"></script>
 		<script src="{{ asset('frontend') }}/libs/bootstrap/js/bootstrap.js"></script>
@@ -491,8 +423,494 @@
 		<script src="{{ asset('frontend') }}/libs/slider-range/js/jquery.slider.js"></script>
 		<script src="{{ asset('frontend') }}/libs/elevatezoom/jquery.elevatezoom.js"></script>
 
+        <script src="{{ asset('frontend') }}/js/sweetalert2@8.js"></script>
+
 		<!-- Template CSS -->
 		<script src="{{ asset('frontend') }}/js/main.js"></script>
+
+        <script type="text/javascript" src="{{ asset('frontend') }}/libs/toastr/toastr.min.js"></script>
+
+        <script>
+            @if (Session::has('message'))
+                var type ="{{ Session::get('alert-type', 'info') }}"
+                switch(type){
+                case 'info':
+                toastr.info(" {{ Session::get('message') }} ");
+                break;
+
+                case 'success':
+                toastr.success(" {{ Session::get('message') }} ");
+                break;
+
+                case 'warning':
+                toastr.warning(" {{ Session::get('message') }} ");
+                break;
+
+                case 'error':
+                toastr.error(" {{ Session::get('message') }} ");
+                break;
+                }
+            @endif
+
+        </script>
+
+        <script>
+
+                //start product view
+                function productView(id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/product/view/modal/' + id,
+                        dataType: 'json',
+                        success: function(data) {
+                            $("#pimage").attr("src","");
+                            $('#pname').text(data.product.product_name_en);
+                            $('#pcode').text(data.product.product_code);
+                            $('#pcategory').text(data.product.category.category_name_en);
+                            $("#pimage").attr("src",data.product.product_thambnail);
+                            $('#product_id').val(id);
+                            $('#qty').val(1);
+                            //product price
+                            if (data.product.discount_price == null) {
+                                $('#pprice').text('');
+                                $('#oldprice').text('');
+                                $('#pprice').text(data.product.selling_price);
+                            } else {
+                                $('#pprice').text(data.product.discount_price);
+                                $('#oldprice').text(data.product.selling_price);
+                            }
+
+                            // //stock
+                            if (data.product.product_qty > 0) {
+                                $('#aviable').text('');
+                                $('#stockout').text('');
+                                $('#available').text('available');
+                            } else {
+                                $('#available').text('');
+                                $('#stockout').text('');
+                                $('#stockout').text('stockout');
+                            }
+
+                            //color
+                            $('select[name="color"]').empty();
+                            $.each(data.color, function(key, value) {
+                                $('select[name="color"]').append('<option value="' + value + '">' + value +
+                                    '</option>')
+                            })
+                            //size
+                            $('select[name="size"]').empty();
+                            $.each(data.size, function(key, value) {
+                                $('select[name="size"]').append('<option value="' + value + '">' + value +
+                                    '</option>')
+                                if (data.size == "") {
+                                    $('#sizeArea').hide();
+                                } else {
+                                    $('#sizeArea').show();
+                                }
+                            })
+                        }
+                    })
+                }
+                //end product view
+
+                //Start add to cart product
+                function addToCart() {
+                    var product_name = $('#pname').text();
+                    var id = $('#product_id').val();
+                    var color = $('#color option:selected').text();
+                    var size = $('#size option:selected').text();
+                    var quantity = $('#qty').val();
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'json',
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            color: color,
+                            size: size,
+                            quantity: quantity,
+                            product_name: product_name
+                        },
+                        url: "/cart/data/store/" + id,
+                        success: function(data) {
+                            miniCart();
+                            $('#closeModal').click();
+                            //  start message
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            //  end message
+                        }
+                    })
+                }
+                //End add to cart product
+
+                 // getting cart product from at minicart
+                function miniCart() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/product/mini/cart',
+                        dataType: 'json',
+                        success: function(response) {
+                            $('span[id="cartSubTotal"]').text(response.cartTotal);
+                            $('#cartQty').text(response.cartQty);
+                            var miniCart = ""
+                            $.each(response.carts, function(key, value) {
+                                miniCart += `<tr>
+                                            <td class="product-image">
+                                                <a href="product-detail-left-sidebar.html">
+                                                    <img src="/${value.options.image}" alt="Product">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <div class="product-name">
+                                                    <a href="#">${value.name}</a>
+                                                </div>
+                                                <div>
+                                                    ${value.qty} x <span class="product-price">$${value.price}</span>
+                                                </div>
+                                            </td>
+                                            <td class="action">
+                                                <a class="remove" href="#"  id="${value.rowId}" onclick="miniCartRemove(this.id)">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>`
+                            });
+
+                            $('#miniCart').html(miniCart);
+                        }
+                    })
+                }
+                miniCart();
+
+                 /// mini cart remove start
+                function miniCartRemove(rowId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/minicart/product-remove/' + rowId,
+                        dataType: 'json',
+                        success: function(data) {
+                            miniCart();
+                            //  start message
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            //  end message
+                        }
+                    });
+                }
+                // mini cart remove end
+
+                function addToWishlist(product_id) {
+                    $.ajax({
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                    dataType: 'json',
+                    url: "/addTo/wishlist/" + product_id,
+                    success: function(data) {
+                            //  start message
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            //  end message
+                        }
+                    })
+                }
+
+                function wishlist() {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/get/wishlist/product",
+                        dataType: 'json',
+                        success: function(response) {
+                            var rows = ""
+                            $.each(response, function(key, value) {
+                                rows += `<tr>
+                                        <td class="product-remove">
+                                            <a title="Remove this item" class="remove" href="#" id="${value.id}" onclick="wishlistRemove(this.id)">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <img width="80" alt="Product Image" class="img-responsive" src="/${value.product.product_thambnail}">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="product-name">${value.product.product_name_en}</a>
+                                        </td>
+                                        <td class="text-center">
+                                             ${value.product.discount_price == null
+                                                ? `$${value.product.selling_price}`
+                                                :
+                                                `$${value.product.discount_price} <del>$${value.product.selling_price}</del>`
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="add-to-cart" href="#" data-toggle="modal" data-target="#cartModal" id="${value.product_id}"
+                                                onclick="productView(this.id)">
+                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>`
+                            });
+
+                            $('#wishlist').html(rows);
+                        }
+                    })
+                }
+                wishlist();
+
+                function wishlistRemove(id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/wishlist/remove/" + id,
+                        dataType: 'json',
+                        success: function(data) {
+                            wishlist();
+                            //  start message
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            //  end message
+                        }
+                    });
+                }
+
+                function cart() {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/get/cart/product",
+                        dataType: 'json',
+                        success: function(response) {
+                            var rows = ""
+                            $.each(response.carts, function(key, value) {
+                                rows += ` <tr>
+                                    <td class="product-remove">
+                                        <a title="Remove this item" class="remove" href="#" id="${value.rowId}" onclick="CartRemove(this.id)">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img width="80" alt="Product Image" class="img-responsive" src="/${value.options.image}">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="product-name">${value.name} $${value.price}</a>
+                                    </td>
+                                    <td class="text-center">
+                                        ${value.options.color}
+                                    </td>
+                                    <td class="text-center">
+                                        ${value.options.size}
+                                    </td>
+                                    <td>
+                                        <div class="product-quantity">
+                                            <div class="qty">
+                                                <div class="input-group">
+                                                    <input type="text" name="qty" value="${value.qty}" data-min="1">
+                                                    <span class="adjust-qty">
+                                                        <span class="adjust-btn plus" id="${value.rowId}" onclick="cartIncrement(this.id)">+</span>
+                                                        <span class="adjust-btn minus" id="${value.rowId}" onclick="cartDecrement(this.id)">-</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        $${value.subtotal}
+                                    </td>
+                                </tr>`
+                            });
+                            rows += `<tr class="cart-total">
+                                    <td rowspan="3" colspan="4"></td>
+                                    <td colspan="2" class="text-right">Total products</td>
+                                    <td colspan="1" class="text-center">${response.cartQty}</td>
+                                </tr>
+                                <tr class="cart-total">
+                                    <td colspan="2" class="text-right">Total shipping</td>
+                                    <td colspan="1" class="text-center">$10</td>
+                                </tr>
+                                <tr class="cart-total">
+                                    <td colspan="2" class="total text-right">Total</td>
+                                    <td colspan="1" class="total text-center">$${response.cartTotal}</td>
+                                </tr>`
+                            $('#cartPage').html(rows);
+                        }
+                    })
+                }
+                cart();
+
+                function CartRemove(id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/cart/remove/" + id,
+                        dataType: 'json',
+                        success: function(data) {
+                            cart();
+                            miniCart();
+                            // couponCalculation();
+                            // $('#couponField').show();
+                            // $('#coupon_name').val('');
+                            //  start message
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            //  end message
+                        }
+                    });
+                }
+
+                function cartIncrement(rowId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/cart/increment/" + rowId,
+                        dataType: 'json',
+                        success: function(data) {
+                            // couponCalculation();
+                            cart();
+                            miniCart();
+                            //  start message
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            //  end message
+                        }
+                    });
+                }
+
+                function cartDecrement(rowId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "/cart/decrement/" + rowId,
+                        dataType: 'json',
+                        success: function(data) {
+                            // couponCalculation();
+                            cart();
+                            miniCart();
+                             //  start message
+                             const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    type: 'success',
+                                    title: data.success
+                                })
+                            } else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                            }
+                            //  end message
+                        }
+                    });
+                }
+
+        </script>
+
+        @yield('script')
 	</body>
 
 </html>
