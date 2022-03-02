@@ -31,13 +31,13 @@ class IndexController extends Controller
     }
 
     // view of a product modal using ajax
-    public function productViewAjax($id){
+    public function productViewAjax($id)
+    {
         $product = Product::with('category')->findOrFail($id);
-
         $color = $product->product_color_en;
-        $product_color = explode(',',$color);
+        $product_color = explode(',', $color);
         $size = $product->product_size_en;
-        $produt_size = explode(',',$size);
+        $produt_size = explode(',', $size);
 
         return response()->json([
             'product' => $product,
@@ -45,5 +45,4 @@ class IndexController extends Controller
             'size' => $produt_size,
         ]);
     }
-
 }

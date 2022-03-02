@@ -164,52 +164,31 @@
 								<div id="main-menu">
 									<ul class="menu">
 										<li class="dropdown">
-											<a href="home-2.html" title="Homepage">Home</a>
-											<div class="dropdown-menu">
-												<ul>
-													<li><a href="index.html" title="Homepage 1">Homepage 1</a></li>
-													<li><a href="home-2.html" title="Homepage 2">Homepage 2</a></li>
-													<li><a href="home-3.html" title="Homepage 3">Homepage 3</a></li>
-													<li><a href="home-4.html" title="Homepage 4">Homepage 4</a></li>
-													<li><a href="home-5.html" title="Homepage 5">Homepage 5</a></li>
-												</ul>
-											</div>
+											<a href="{{ url('/') }}" title="Homepage">Home</a>
 										</li>
 
 										<li class="dropdown">
-											<a href="product-grid-left-sidebar.html" title="Product">Product</a>
+											<a href="#" title="Product">Product</a>
 											<div class="dropdown-menu">
 												<ul>
+                                                    @php
+                                                        $categorys = App\Models\Admin\Category::all();
+                                                    @endphp
+                                                    @foreach ($categorys as $item)
 													<li class="has-image">
-														<img src="{{ asset('frontend') }}/img/product/product-category-1.png" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Vegetables">Vegetables</a>
-														</li>
-													<li class="has-image">
-														<img src="{{ asset('frontend') }}/img/product/product-category-2.png" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Fruits">Fruits</a>
+														<a href="{{ route('category.product',$item->id) }}" title="{{ $item->category_name_en }}">{{ $item->category_name_en }}</a>
 													</li>
-													<li class="has-image">
-														<img src="{{ asset('frontend') }}/img/product/product-category-3.png" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Bread">Bread</a>
-													</li>
-													<li class="has-image">
-														<img src="{{ asset('frontend') }}/img/product/product-category-4.png" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Juices">Juices</a>
-													</li>
-													<li class="has-image">
-														<img src="{{ asset('frontend') }}/img/product/product-category-5.png" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Tea and coffee">Tea and coffee</a>
-													</li>
+                                                    @endforeach
 												</ul>
 											</div>
 										</li>
 
 										<li>
-											<a href="page-about-us.html">About Us</a>
+											<a href="#">About Us</a>
 										</li>
 
 										<li>
-											<a href="page-contact.html">Contact</a>
+											<a href="#">Contact</a>
 										</li>
 									</ul>
 								</div>
@@ -530,8 +509,8 @@
                         data: {
                             color: color,
                             size: size,
-                            quantity: quantity,
-                            product_name: product_name
+                            me: prquantity: quantity,
+                            product_naoduct_name
                         },
                         url: "/cart/data/store/" + id,
                         success: function(data) {

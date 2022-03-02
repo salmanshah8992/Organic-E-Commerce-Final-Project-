@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Category;
 use App\Models\ShipDistrict;
 use App\Models\ShipDivision;
 use App\Models\ShipState;
@@ -12,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Admin\Product;
+use App\Models\Admin\Subcategory;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -19,18 +21,21 @@ use Illuminate\Support\Facades\Session;
 class CheckoutController extends Controller
 {
     //get district with ajax
-    public function getDistrictWithAjax($division_id){
-        $ship = ShipDistrict::where('division_id',$division_id)->orderBy('district_name','ASC')->get();
+    public function getDistrictWithAjax($division_id)
+    {
+        $ship = ShipDistrict::where('division_id', $division_id)->orderBy('district_name', 'ASC')->get();
         return json_encode($ship);
     }
 
     //  get state with ajax
-    public function getStateWithAjax($district_id){
-        $ship = ShipState::where('district_id',$district_id)->orderBy('state_name','ASC')->get();
+    public function getStateWithAjax($district_id)
+    {
+        $ship = ShipState::where('district_id', $district_id)->orderBy('state_name', 'ASC')->get();
         return json_encode($ship);
     }
 
-    public function ConfirmOrder(Request $request){
+    public function ConfirmOrder(Request $request)
+    {
         // dd($request->all());
 
         $total_amount = Cart::total();
@@ -47,7 +52,7 @@ class CheckoutController extends Controller
             'notes' => $request->notes,
             'payment_method' => $request->payment_method,
             'amount' => $total_amount,
-            'invoice_no' => 'SPM'.mt_rand(10000000,99999999),
+            'invoice_no' => 'SPM' . mt_rand(10000000, 99999999),
             'order_date' => Carbon::now()->format('d F Y'),
             'order_month' => Carbon::now()->format('F'),
             'order_year' => Carbon::now()->format('Y'),
@@ -56,7 +61,7 @@ class CheckoutController extends Controller
         ]);
 
         $carts = Cart::content();
-        foreach ($carts as $cart ) {
+        foreach ($carts as $cart) {
             OrderItem::insert([
                 'order_id' => $order_id,
                 'product_id' => $cart->id,
@@ -69,21 +74,37 @@ class CheckoutController extends Controller
         }
 
         //product stock decrement
-        foreach($carts as $pro){
-            Product::where('id',$pro->id)->decrement('product_qty',$pro->qty);
+        foreach ($carts as $pro) {
+            Product::where('id', $pro->id)->decrement('product_qty', $pro->qty);
         }
 
         Cart::destroy();
 
-        $notification=array(
-            'message'=>'Your Order Place Success',
-            'alert-type'=>'success'
+        $notification = array(
+            'message' => 'Your Order Place Success',
+            'alert-type' => 'success'
         );
         return Redirect()->route('user.profile')->with($notification);
-
     }
 
-    public function UserProfile(){
-        return view('frontend.user_profile');
+    public function UserProfile()
+    {
+        $orders = Order::with('division', 'district', 'state')->get();
+        $ordersItem = OrderItem::with('products')->get();
+        return view('frontend.user_profile', compact('orders', 'ordersItem'));
+    }
+
+    public function SubcategoryProduct($id)
+    {
+        $subcategory = Subcategory::find($id);
+        $products = Product::where('subcategory_id', $id)->get();
+        return view('frontend.subcategory_product', compact('products', 'subcategory'));
+    }
+
+    public function CategoryProduct($id)
+    {
+        $category = Category::find($id);
+        $products = Product::where('category_id', $id)->get();
+        return view('frontend.category_product', compact('products', 'category'));
     }
 }

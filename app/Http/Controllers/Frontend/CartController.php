@@ -21,10 +21,6 @@ class CartController extends Controller
     //store cart
     public function addToCart(Request $request,$id){
 
-        // if (Session::has('coupon')) {
-        //     Session::forget('coupon');
-        // }
-
         $product = Product::findOrFail($id);
 
         if ($product->discount_price == NULL) {

@@ -15,6 +15,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Laravel\Fortify\Contracts\LoginViewResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
@@ -139,6 +140,23 @@ class AdminController extends Controller
             ->whereYear("created_at", date("Y"))
             ->select(
                 DB::raw("(count(status)) as total "),
+                DB::raw("(DATE_FORMAT(created_at, '%m')) as my_date ")
+            )
+            ->orderBy(
+                "my_date",
+                "ASC"
+            )
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m')"))
+            ->pluck('total', 'my_date');
+
+        return response($totalSale);
+    }
+
+    public function lineChart()
+    {
+        $totalSale = User::whereYear("created_at", date("Y"))
+            ->select(
+                DB::raw("(count(id)) as total "),
                 DB::raw("(DATE_FORMAT(created_at, '%m')) as my_date ")
             )
             ->orderBy(

@@ -45,10 +45,6 @@ Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', fun
 Route::post('/logout', [AdminController::class, 'destroy'])
     ->name('logout');
 
-// Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-//     return view('frontend.index');
-// })->name('dashboard');
-
 Route::get('/dashboard', [IndexController::class, 'index'])->middleware(['auth:sanctum,web', 'verified']);
 
 // routes for brand
@@ -162,7 +158,10 @@ Route::post('/order/confirm', [CheckoutController::class, 'ConfirmOrder'])->name
 
 
 // user profile
+
 Route::get('user/profile/view', [CheckoutController::class, 'UserProfile'])->name('user.profile');
+Route::get('subcatgory/wise/product/{id}', [CheckoutController::class, 'SubcategoryProduct'])->name('subcategory.product');
+Route::get('category/wise/product/{id}', [CheckoutController::class, 'CategoryProduct'])->name('category.product');
 
 
 // pie chart
@@ -171,3 +170,5 @@ Route::get('/get/pie', [AdminController::class, 'pieChart']);
 Route::get('/get/donut', [AdminController::class, 'DoughnutChartOne']);
 //for BarChart
 Route::get('/get/bar', [AdminController::class, 'barChart']);
+//for line
+Route::get('/get/line', [AdminController::class, 'lineChart']);

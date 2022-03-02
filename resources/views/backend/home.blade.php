@@ -328,7 +328,7 @@
         type:'GET',
         url:'/get/donut',
         success:function(data) {
-            console.log(data);
+            // console.log(data);
             const ctx = document.getElementById('donut_chart');
             const myChart = new Chart(ctx, {
             type: 'doughnut',
@@ -348,74 +348,6 @@
                         borderWidth: 1
                     }]
                 },
-            });
-        }
-    });
-
-</script>
-
-<script>
-
-    $.ajax({
-        type: "GET",
-        url: "/get/bar",
-        success: function (data) {
-            console.log(data);
-            var barkeys = Object.keys(data);
-            console.log(barkeys);
-            var barArray=[];
-
-            for(var i=1;i<=12;i++)
-            {
-                if(i<10)
-                {
-                    var check = '0'+i;
-                    check =  check.toString();
-                }
-                else
-                {
-                   var check=i;
-                   check =  check.toString();
-                }
-
-                if(data[check] !== undefined)
-                {
-                    barArray.push(data[check]);
-                }
-                else
-                {
-                    barArray.push(0);
-                }
-            }
-            console.log(barArray);
-
-            const ctx = document.getElementById('bar-chart');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
-                    datasets: [{
-                        label: 'Total Number of Sale',
-                        data: barArray,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                }
             });
         }
     });
@@ -455,7 +387,71 @@
                     barArray.push(0);
                 }
             }
-            // console.log(barArray);
+            const ctx = document.getElementById('bar-chart');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+                    datasets: [{
+                        label: 'User registration based on month',
+                        data: barArray,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+        }
+    });
+
+</script>
+
+<script>
+
+    $.ajax({
+        type: "GET",
+        url: "/get/line",
+        success: function (data) {
+            var barkeys = Object.keys(data);
+            // console.log(barkeys);
+            var lineArray=[];
+            console.log(data);
+            for(var i=1;i<=12;i++)
+            {
+                if(i<10)
+                {
+                    var check = '0'+i;
+                    check =  check.toString();
+                }
+                else
+                {
+                   var check=i;
+                   check =  check.toString();
+                }
+
+                if(data[check] !== undefined)
+                {
+                    lineArray.push(data[check]);
+                }
+                else
+                {
+                    lineArray.push(0);
+                }
+            }
 
             const ctx = document.getElementById('line-chart');
             const myChart = new Chart(ctx, {
@@ -464,7 +460,7 @@
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
                     datasets: [{
                         label: 'Total Number of Sale',
-                        data: barArray,
+                        data: lineArray,
                         backgroundColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',

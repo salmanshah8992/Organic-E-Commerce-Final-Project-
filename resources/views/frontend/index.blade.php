@@ -17,6 +17,35 @@
         </div>
     </div>
 
+    <!-- Banners -->
+    <div class="section banners">
+        <div class="container">
+            <div class="row margin-10">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-10">
+                    <div class="banner-item effect">
+                        <a href="#">
+                            <img class="img-responsive" src="{{ asset('frontend') }}/img/banner/home2-banner-1.png" alt="Banner 1">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-10">
+                    <div class="banner-item effect">
+                        <a href="#">
+                            <img class="img-responsive" src="{{ asset('frontend') }}/img/banner/home2-banner-2.png" alt="Banner 2">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-10">
+                    <div class="banner-item effect">
+                        <a href="#">
+                            <img class="img-responsive" src="{{ asset('frontend') }}/img/banner/home2-banner-3.png" alt="Banner 3">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 2 Columns -->
     <div class="two-columns">
         <div class="container">
@@ -35,14 +64,14 @@
                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                                 </span>
-                                <a class="category-title" href="#">{{ $category->category_name_en }}</a>
+                                <a class="category-title" href="{{ route('category.product',$category->id) }}">{{ $category->category_name_en }}</a>
                                 <div class="sub-category collapse" id="cat{{ $category->id }}" aria-expanded="true" role="main">
                                     @php
                                         $subcategorys = App\Models\Admin\Subcategory::where('category_id',$category->id)->get();
                                     @endphp
                                     @foreach ($subcategorys as $subcategory)
                                         <div class="item">
-                                            <a href="#">{{ $subcategory->subcategory_name_en }}</a>
+                                            <a href="{{ route('subcategory.product',$subcategory->id) }}">{{ $subcategory->subcategory_name_en }}</a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -59,51 +88,51 @@
                         <div class="block-content">
                             <div class="products owl-theme owl-carousel">
                                 @foreach ($hot_deals as $hot_deal)
-                                <div class="product-item">
-                                    <div class="product-image">
-                                        <a href="#">
-                                            <img src="{{ url($hot_deal->product_thambnail) }}" alt="Product Image">
-                                        </a>
+                                    <div class="product-item">
+                                        <div class="product-image">
+                                            <a href="{{ route('product.details',$hot_deal->id) }}">
+                                                <img src="{{ url($hot_deal->product_thambnail) }}" alt="Product Image">
+                                            </a>
+                                        </div>
+
+                                        <div class="product-countdown" data-date="2018/11/28">
+                                        </div>
+
+                                        <div class="product-title">
+                                            <a href="#">
+                                                {{ $hot_deal->product_name_en }}
+                                            </a>
+                                        </div>
+
+                                        <div class="product-rating">
+                                            <div class="star on"></div>
+                                            <div class="star on"></div>
+                                            <div class="star on "></div>
+                                            <div class="star on"></div>
+                                            <div class="star"></div>
+                                        </div>
+
+                                        <div class="product-price">
+                                            <span class="sale-price">${{ $hot_deal->discount_price }}</span>
+                                            <span class="base-price">${{ $hot_deal->selling_price }}</span>
+                                        </div>
+
+                                        <div class="product-buttons">
+                                            <a class="add-to-cart" href="#" data-toggle="modal" data-target="#cartModal" id="{{ $hot_deal->id }}"
+                                                onclick="productView(this.id)">
+                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                            </a>
+
+                                            <a class="add-wishlist" href="#">
+                                                <i class="fa fa-heart" aria-hidden="true" id="{{ $hot_deal->id }}"
+                                                    onclick="addToWishlist(this.id)"></i>
+                                            </a>
+
+                                            <a class="quickview" href="#">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
                                     </div>
-
-                                    <div class="product-countdown" data-date="2018/11/28">
-                                    </div>
-
-                                    <div class="product-title">
-                                        <a href="#">
-                                            {{ $hot_deal->product_name_en }}
-                                        </a>
-                                    </div>
-
-                                    <div class="product-rating">
-                                        <div class="star on"></div>
-                                        <div class="star on"></div>
-                                        <div class="star on "></div>
-                                        <div class="star on"></div>
-                                        <div class="star"></div>
-                                    </div>
-
-                                    <div class="product-price">
-                                        <span class="sale-price">${{ $hot_deal->discount_price }}</span>
-                                        <span class="base-price">${{ $hot_deal->selling_price }}</span>
-                                    </div>
-
-                                    <div class="product-buttons">
-                                        <a class="add-to-cart" href="#" data-toggle="modal" data-target="#cartModal" id="{{ $hot_deal->id }}"
-                                            onclick="productView(this.id)">
-                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                        </a>
-
-                                        <a class="add-wishlist" href="#">
-                                            <i class="fa fa-heart" aria-hidden="true" id="{{ $hot_deal->id }}"
-                                                onclick="addToWishlist(this.id)"></i>
-                                        </a>
-
-                                        <a class="quickview" href="#">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -145,12 +174,12 @@
                             <div class="tab-nav">
                                 <ul>
                                     <li class="active">
-                                        <a data-toggle="tab" href="new-arrivals.html">
+                                        <a data-toggle="tab" href="#featured">
                                             <span>Featured</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#best-seller">
+                                        <a data-toggle="tab" href="#specialDeal">
                                             <span>Special Deals</span>
                                         </a>
                                     </li>
@@ -160,7 +189,7 @@
                             <!-- Tab Content -->
                             <div class="tab-content">
                                 <!-- New Arrivals -->
-                                <div role="tabpanel" class="tab-pane fade in active" id="new-arrivals">
+                                <div role="tabpanel" class="tab-pane fade in active" id="featured">
                                     <div class="products owl-theme owl-carousel">
                                         @php
                                             $products = App\Models\Admin\Product::where('featured','1')->get();
@@ -213,7 +242,7 @@
                                 </div>
 
                                 <!-- Best Seller -->
-                                <div role="tabpanel" class="tab-pane fade" id="best-seller">
+                                <div role="tabpanel" class="tab-pane fade" id="specialDeal">
                                     <div class="products owl-theme owl-carousel">
                                         @php
                                              $products = App\Models\Admin\Product::where('special_deals','1')->get();
@@ -300,7 +329,7 @@
                                             <div class="product-item">
                                                 <div class="product-image">
                                                     <a href="{{ route('product.details',$fruit->id) }}">
-                                                        <img src="{{ asset('frontend') }}/img/product/4.jpg" alt="Product Image">
+                                                        <img src="{{ url($fruit->product_thambnail) }}" alt="Product Image">
                                                     </a>
                                                 </div>
 
@@ -552,7 +581,7 @@
         </div>
     </div>
 
-    
+
 @endsection
 
 
