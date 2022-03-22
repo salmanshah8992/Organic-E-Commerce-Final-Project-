@@ -2,6 +2,13 @@
 
 @section('main_content')
 
+<style>
+    .text-danger{
+        color: red!important;
+        font-weight: 800;
+        font-size: 14px;
+    }
+</style>
 <div class="breadcrumb">
     <div class="container">
         <div class="breadcrumb-inner">
@@ -38,8 +45,11 @@
                                                     <input type="text"
                                                         class="form-control unicase-form-control text-input"
                                                         id="exampleInputEmail1" placeholder="full name"
-                                                        name="shipping_name" required value="{{ Auth::user()->name }}"
-                                                        data-validation="required">
+                                                        name="shipping_name"  value="{{ Auth::user()->name }}"
+                                                        >
+                                                    @error('shipping_name')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group">
@@ -48,8 +58,11 @@
                                                     <input type="text"
                                                         class="form-control unicase-form-control text-input"
                                                         name="shipping_email" id="exampleInputEmail1"
-                                                        placeholder="full name" required value="{{ Auth::user()->email }}"
-                                                        data-validation="required">
+                                                        placeholder="full name"  value="{{ Auth::user()->email }}"
+                                                        >
+                                                    @error('shipping_email')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group">
@@ -58,8 +71,11 @@
                                                     <input type="text"
                                                         class="form-control unicase-form-control text-input"
                                                         name="shipping_phone" id="exampleInputEmail1"
-                                                        placeholder="full name" required value="{{ Auth::user()->phone }}"
-                                                        data-validation="required">
+                                                        placeholder="phone number"  value="{{ Auth::user()->phone }}"
+                                                        >
+                                                        @error('shipping_phone')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group">
@@ -67,8 +83,11 @@
                                                         <span>*</span></label>
                                                     <input type="text"
                                                         class="form-control unicase-form-control text-input"
-                                                        name="post_code" required id="exampleInputEmail1" placeholder="post code"
-                                                        data-validation="required">
+                                                        name="post_code"  id="exampleInputEmail1" placeholder="post code"
+                                                        >
+                                                        @error('post_code')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
 
@@ -81,7 +100,7 @@
                                                             class="tx-danger">*</span></label>
                                                     <select class="form-control select2-show-search"
                                                         data-placeholder="Select One" name="division_id"
-                                                        data-validation="required" required>
+                                                         >
                                                         <option label="Choose one"></option>
                                                         @foreach ($divisions as $item)
                                                             <option value="{{ $item->id }}">
@@ -97,7 +116,7 @@
                                                             class="tx-danger">*</span></label>
                                                     <select class="form-control select2-show-search"
                                                         data-placeholder="Select One" name="district_id"
-                                                        data-validation="required" id="district" required>
+                                                         id="district" >
                                                         <option label="Choose one"></option>
                                                     </select>
                                                     @error('district_id')
@@ -110,7 +129,7 @@
                                                             class="tx-danger">*</span></label>
                                                     <select class="form-control select2-show-search"
                                                         data-placeholder="Select One" name="state_id"
-                                                        data-validation="required" required>
+                                                         >
                                                         <option label="Choose one"></option>
                                                     </select>
                                                     @error('state_id')
@@ -122,7 +141,7 @@
                                                     <label class="info-title" for="exampleInputEmail1">Notes
                                                         <span>*</span></label>
                                                     <textarea name="notes" class="form-control" id="" cols="30" rows="5"
-                                                        placeholder="notes" data-validation="required" required></textarea>
+                                                        placeholder="notes"  ></textarea>
                                                 </div>
 
                                             </div>
@@ -160,7 +179,7 @@
                                             @endforeach
                                             <hr>
                                             <li>
-                                                    <strong>Subtotal: </strong> ${{ $cartTotal }} <br>
+                                                    <strong>Subtotal: </strong> ৳{{ $cartTotal }} <br>
                                             </li>
                                         </ul>
                                     </div>
@@ -183,11 +202,11 @@
                                             <hr>
                                             <li>
                                                 <input type="radio" name="payment_method" value="Bkash">
-                                                <label for="">Bkash</label>
+                                                <label for="">Bkash(01521415098)</label>
                                             </li>
                                             <li>
                                                 <input type="radio" name="payment_method" value="Nagad">
-                                                <label for="">Nagad</label>
+                                                <label for="">Nagad(01914716755)</label>
                                             </li>
 
                                             <li>
@@ -199,6 +218,9 @@
                                                 <input type="radio" name="payment_method" value="cash_delivery">
                                                 <label for="">Cash On Delivery</label>
                                             </li>
+                                            @error('payment_method')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                            @enderror
 
                                             <button type="submit"
                                                 class="btn-upper btn btn-primary checkout-page-button pull-right">Confirm Order</button>

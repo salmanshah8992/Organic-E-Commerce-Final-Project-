@@ -67,6 +67,21 @@
               <li class=" nav-item"><a href="{{ route('view.product') }}"  class="d-flex align-items-center"><i data-feather="mail"></i>View Product</a></li>
           </ul>
       </li>
+      <li>
+        <a href="javascript: void(0);" class="has-arrow waves-effect">
+          <i data-feather="mail"></i>
+            <span>Orders</span>
+        </a>
+        <ul class="sub-menu" aria-expanded="false">
+            <li class=" nav-item"><a href="{{ route('pending-orders') }}"  class="d-flex align-items-center"><i data-feather="mail"></i>Pending Orders</a></li>
+        </ul>
+        <ul class="sub-menu" aria-expanded="false">
+            <li class=" nav-item"><a href="{{ route('processing-orders') }}"  class="d-flex align-items-center"><i data-feather="mail"></i>Processing Orders</a></li>
+        </ul>
+        <ul class="sub-menu" aria-expanded="false">
+            <li class=" nav-item"><a href="{{ route('delivered-orders') }}"  class="d-flex align-items-center"><i data-feather="mail"></i>Delivered Orders</a></li>
+        </ul>
+    </li>
       <li class=" nav-item"><a  href="{{ route('division') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Division</span></a>
       </li>
 

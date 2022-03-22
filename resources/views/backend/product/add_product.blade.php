@@ -196,7 +196,7 @@ input, optgroup, select, textarea {
               <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label">Selling Price: <span class="tx-danger">*</span></label>
-                    <input class="form-control" type="text" name="selling_price" value="{{ old('selling_price') }}" placeholder="Selling Price">
+                    <input class="form-control" type="number" name="selling_price" value="{{ old('selling_price') }}" placeholder="Selling Price">
                     @error('selling_price')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror
@@ -206,7 +206,7 @@ input, optgroup, select, textarea {
               <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label">Discount Price: <span class="tx-danger">*</span></label>
-                    <input class="form-control" type="text" name="discount_price" value="{{ old('discount_price') }}" placeholder="Discount Price">
+                    <input class="form-control" type="number" name="discount_price" value="{{ old('discount_price') }}" placeholder="Discount Price">
                     @error('discount_price')
                     <span class="text-danger">{{ $message }}</span>
                   @enderror

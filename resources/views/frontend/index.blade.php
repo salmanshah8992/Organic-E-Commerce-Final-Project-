@@ -113,8 +113,8 @@
                                         </div>
 
                                         <div class="product-price">
-                                            <span class="sale-price">${{ $hot_deal->discount_price }}</span>
-                                            <span class="base-price">${{ $hot_deal->selling_price }}</span>
+                                            <span class="sale-price">৳{{ $hot_deal->discount_price }}</span>
+                                            <span class="base-price">৳{{ $hot_deal->selling_price }}</span>
                                         </div>
 
                                         <div class="product-buttons">
@@ -217,8 +217,8 @@
                                             </div>
 
                                             <div class="product-price">
-                                                <span class="sale-price">${{ $product->discount_price }}</span>
-                                                <span class="base-price">${{ $product->selling_price }}</span>
+                                                <span class="sale-price">৳{{ $product->discount_price }}</span>
+                                                <span class="base-price">৳{{ $product->selling_price }}</span>
                                             </div>
 
                                             <div class="product-buttons">
@@ -270,8 +270,8 @@
                                                 </div>
 
                                                 <div class="product-price">
-                                                    <span class="sale-price">${{ $product->discount_price }}</span>
-                                                    <span class="base-price">${{ $product->selling_price }}</span>
+                                                    <span class="sale-price">৳{{ $product->discount_price }}</span>
+                                                    <span class="base-price">৳{{ $product->selling_price }}</span>
                                                 </div>
 
                                                 <div class="product-buttons">
@@ -348,8 +348,8 @@
                                                 </div>
 
                                                 <div class="product-price">
-                                                    <span class="sale-price">${{ $fruit->discount_price }}</span>
-                                                    <span class="base-price">${{ $fruit->selling_price }}</span>
+                                                    <span class="sale-price">৳{{ $fruit->discount_price }}</span>
+                                                    <span class="base-price">৳{{ $fruit->selling_price }}</span>
                                                 </div>
 
                                                 <div class="product-buttons">
@@ -410,8 +410,8 @@
                                             </div>
 
                                             <div class="product-price">
-                                                <span class="sale-price">$ {{ $honey->discount_price }}</span>
-                                                <span class="base-price">$ {{ $honey->selling_price }}</span>
+                                                <span class="sale-price">৳{{ $honey->discount_price }}</span>
+                                                <span class="base-price">৳{{ $honey->selling_price }}</span>
                                             </div>
 
                                             <div class="product-buttons">
@@ -494,8 +494,8 @@
                                             </div>
 
                                             <div class="product-price">
-                                                <span class="sale-price">${{ $recent_product->discount_price }}</span>
-                                                <span class="base-price">${{ $recent_product->selling_price }}</span>
+                                                <span class="sale-price">৳{{ $recent_product->discount_price }}</span>
+                                                <span class="base-price">৳{{ $recent_product->selling_price }}</span>
                                             </div>
 
                                             <div class="product-buttons">

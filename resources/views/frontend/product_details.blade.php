@@ -32,14 +32,14 @@
                                 <i class="zmdi zmdi-plus"></i>
                             </span>
 
-                            <a class="category-title" href="product-grid-left-sidebar.html">{{ $category->category_name_en }}</a>
+                            <a class="category-title" href="{{ route('category.product',$category->id) }}">{{ $category->category_name_en }}</a>
                             <div class="sub-category collapse" id="cat{{ $category->id }}" aria-expanded="true" role="main">
                                 @php
                                     $subcategorys = App\Models\Admin\Subcategory::where('category_id',$category->id)->get();
                                 @endphp
                                 @foreach ($subcategorys as $subcategory)
                                     <div class="item">
-                                        <a href="#">{{ $subcategory->subcategory_name_en }}</a>
+                                        <a href="{{ route('subcategory.product',$subcategory->id) }}">{{ $subcategory->subcategory_name_en }}</a>
                                     </div>
                                 @endforeach
                             </div>
@@ -86,8 +86,8 @@
                                         </div>
 
                                         <div class="product-price">
-                                            <span class="sale-price">${{ $special_offer->discount_price }}</span>
-                                            <span class="base-price">${{ $special_offer->selling_price }}</span>
+                                            <span class="sale-price">৳{{ $special_offer->discount_price }}</span>
+                                            <span class="base-price">৳{{ $special_offer->selling_price }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -146,8 +146,8 @@
                                 <div class="product-right col-md-7 col-sm-7 col-xs-12">
                                     <div class="product-info">
                                         <div class="product-price">
-                                            <span class="sale-price">${{ $product_detail->discount_price }}</span>
-                                            <span class="base-price">${{ $product_detail->selling_price }}</span>
+                                            <span class="sale-price">৳{{ $product_detail->discount_price }}</span>
+                                            <span class="base-price">৳{{ $product_detail->selling_price }}</span>
                                         </div>
 
                                         <div class="product-stock">
@@ -173,7 +173,7 @@
                                             </div>
                                             @endif
 
-                                            <div class="product-variants-item">
+                                            {{-- <div class="product-variants-item">
                                                 <span class="control-label">Color :</span>
 
                                                 <ul>
@@ -202,10 +202,10 @@
                                                         <span class="color" style="background-color: #FCCACD"></span>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
-                                        <div class="product-add-to-cart border-bottom">
+                                        {{-- <div class="product-add-to-cart border-bottom">
                                             <div class="product-quantity">
                                                 <span class="control-label">QTY :</span>
                                                 <div class="qty">
@@ -229,7 +229,7 @@
                                                     <i class="fa fa-heart" aria-hidden="true"></i>
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="product-share border-bottom">
                                             <div class="item">
@@ -438,8 +438,8 @@
                                 </div>
 
                                 <div class="product-price">
-                                    <span class="sale-price">${{ $related_product->discount_price }}</span>
-                                    <span class="base-price">${{ $related_product->selling_price }}</span>
+                                    <span class="sale-price">৳{{ $related_product->discount_price }}</span>
+                                    <span class="base-price">৳{{ $related_product->selling_price }}</span>
                                 </div>
 
                                 <div class="product-buttons">

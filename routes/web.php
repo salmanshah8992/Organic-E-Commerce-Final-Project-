@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\Brancontroller;
 use App\Http\Controllers\Admin\Couponcontroller;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -124,8 +125,6 @@ Route::post('state/update', [ShippingAreaController::class, 'stateUpdate'])->nam
 Route::get('state-delete/{id}', [ShippingAreaController::class, 'stateDestroy']);
 
 
-
-
 Route::get('product/details/{id}', [IndexController::class, 'ProductDetails'])->name('product.details');
 
 
@@ -160,9 +159,17 @@ Route::post('/order/confirm', [CheckoutController::class, 'ConfirmOrder'])->name
 // user profile
 
 Route::get('user/profile/view', [CheckoutController::class, 'UserProfile'])->name('user.profile');
+Route::get('user/profile/order/items/{id}', [CheckoutController::class, 'UserProfileItems'])->name('user.profile.order.items');
 Route::get('subcatgory/wise/product/{id}', [CheckoutController::class, 'SubcategoryProduct'])->name('subcategory.product');
 Route::get('category/wise/product/{id}', [CheckoutController::class, 'CategoryProduct'])->name('category.product');
 
+//orders
+Route::get('pending-orders',[OrderController::class,'pendingOrder'])->name('pending-orders');
+Route::get('orders-view/{id}',[OrderController::class,'viewOrders']);
+Route::get('processing-orders',[OrderController::class,'processingOrder'])->name('processing-orders');
+Route::get('delivered-orders',[OrderController::class,'deliveredOrders'])->name('delivered-orders');
+Route::get('confirm/order/{id}',[OrderController::class,'orderCOnfirm'])->name('order.confirm');
+Route::get('deliver/order/{id}',[OrderController::class,'orderDeliver'])->name('order.deliver');
 
 // pie chart
 Route::get('/get/pie', [AdminController::class, 'pieChart']);

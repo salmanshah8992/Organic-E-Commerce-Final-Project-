@@ -61,7 +61,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="total-products">There are 12 products</div>
+                                <div class="total-products">There are {{ $products_count }} products</div>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                         <div class="product-item">
                                             <div class="product-image">
-                                                <a href="product-detail-left-sidebar.html">
+                                                <a href="{{ route('product.details',$product->id) }}">
                                                     <img class="img-responsive" src="{{ url($product->product_thambnail) }}" alt="Product Image">
                                                 </a>
                                             </div>
@@ -94,8 +94,8 @@
                                             </div>
 
                                             <div class="product-price">
-                                                <span class="sale-price">${{ $product->discount_price }}</span>
-                                                <span class="base-price">${{ $product->selling_price }}</span>
+                                                <span class="sale-price">৳{{ $product->discount_price }}</span>
+                                                <span class="base-price">৳{{ $product->selling_price }}</span>
                                             </div>
 
                                             <div class="product-buttons">

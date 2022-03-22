@@ -36,7 +36,16 @@ class CheckoutController extends Controller
 
     public function ConfirmOrder(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+            'shipping_name' => 'required|max:191',
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'state_id' => 'required',
+            'shipping_email' => 'required | email',
+            'shipping_phone' => 'required|numeric',
+            'post_code' => 'required',
+            'payment_method' => 'required',
+        ]);
 
         $total_amount = Cart::total();
 
@@ -89,22 +98,29 @@ class CheckoutController extends Controller
 
     public function UserProfile()
     {
-        $orders = Order::with('division', 'district', 'state')->get();
-        $ordersItem = OrderItem::with('products')->get();
-        return view('frontend.user_profile', compact('orders', 'ordersItem'));
+        $orders = Order::with('division', 'district', 'state')->where('user_id',Auth::user()->id)->get();
+        $order_phone = Order::where('user_id',Auth::user()->id)->orderBy('id', 'DESC')->first();
+        return view('frontend.user_profile', compact('orders','order_phone'));
     }
 
     public function SubcategoryProduct($id)
     {
         $subcategory = Subcategory::find($id);
         $products = Product::where('subcategory_id', $id)->get();
-        return view('frontend.subcategory_product', compact('products', 'subcategory'));
+        $products_count = Product::where('subcategory_id', $id)->count();
+        return view('frontend.subcategory_product', compact('products', 'subcategory','products_count'));
     }
 
     public function CategoryProduct($id)
     {
         $category = Category::find($id);
         $products = Product::where('category_id', $id)->get();
-        return view('frontend.category_product', compact('products', 'category'));
+        $products_count = Product::where('category_id', $id)->count();
+        return view('frontend.category_product', compact('products', 'category','products_count'));
+    }
+
+    public function UserProfileItems($id){
+        $ordersItem =OrderItem::where('order_id',$id)->with('products')->get();
+        return view('frontend.user_profile_details',compact('ordersItem'));
     }
 }

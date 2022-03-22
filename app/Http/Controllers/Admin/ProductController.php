@@ -13,6 +13,7 @@ use App\Models\Admin\Subcategory;
 use Image;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use File;
 
 class ProductController extends Controller
 {
@@ -81,9 +82,6 @@ class ProductController extends Controller
 
         $images = $request->file('multi_img');
         foreach ($images as $img) {
-            //  $make_name=hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-            //  Image::make($img)->resize(917,1000)->save('uploads/products/multi-image/'.$make_name);
-            //  $uplodPath = 'uploads/products/multi-image/'.$make_name;
             $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
             Image::make($img)->resize(600, 600)->save('uploads/products/multi-image/' . $make_name);
             $uplodPath = 'uploads/products/multi-image/' . $make_name;
@@ -115,7 +113,6 @@ class ProductController extends Controller
     public function ProductEdit($product_id)
     {
         $product = Product::findOrFail($product_id);
-        //  dd($request-> $product->id);
         $categories = Category::latest()->get();
         $Subcategories = Subcategory::latest()->get();
         $brands = Brand::latest()->get();
@@ -126,8 +123,7 @@ class ProductController extends Controller
     // product update without image
     public function ProductUpdate(Request $request)
     {
-        //  dd($request->all());
-        // validation
+
         $request->validate([
             'brand_id' => 'required',
             'category_id' => 'required',
@@ -270,7 +266,11 @@ class ProductController extends Controller
     public function ProductDelete($product_id)
     {
         $product = Product::findOrFail($product_id);
-        unlink($product->product_thambnail);
+
+        if($product->product_thambnail != null && File::exists(public_path($product->product_thambnail))){
+            unlink($product->product_thambnail);
+        }
+
         Product::findOrFail($product_id)->delete();
         $images = MultiImg::where('product_id', $product_id)->get();
         foreach ($images as $img) {

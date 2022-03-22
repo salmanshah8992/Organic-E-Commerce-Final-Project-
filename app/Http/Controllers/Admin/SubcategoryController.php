@@ -48,7 +48,7 @@ class SubcategoryController extends Controller
     // //subcategory update
     public function SubCategoryUpdate(Request $request){
 
-        $subcat_id = $request->category_id;
+        $subcat_id = $request->sub_category_id;
 
         Subcategory::findOrFail($subcat_id)->Update([
             'category_id' => $request->category_id,

@@ -25,4 +25,8 @@ class Order extends Model
     {
         return $this->belongsTo(ShipState::class, 'state_id');
     }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User','user_id');
+    }
 }

@@ -55,10 +55,10 @@
 							<div class="col-md-7 col-sm-7 col-xs-12">
 								<div class="topbar-left d-flex">
 									<div class="email">
-										<i class="fa fa-envelope" aria-hidden="true"></i>Email: tivatheme@gmail.com
+										<i class="fa fa-envelope" aria-hidden="true"></i>Email: organicecommerce@gmail.com
 									</div>
 									<div class="skype">
-										<i class="fa fa-skype" aria-hidden="true"></i>Skype: tivatheme
+										<i class="fa fa-skype" aria-hidden="true"></i>Skype: organicecommerce
 									</div>
 								</div>
 							</div>
@@ -211,7 +211,7 @@
                                                     </tr>
 													<tr class="total">
 														<td>Total:</td>
-														<td colspan="2"><span class="sign">$</span><span class="value" id="cartSubTotal"></span></td>
+														<td colspan="2"><span class="sign">৳</span><span class="value" id="cartSubTotal"></span></td>
 													</tr>
 
 													<tr>
@@ -434,7 +434,6 @@
         </script>
 
         <script>
-
                 //start product view
                 function productView(id) {
                     $.ajax({
@@ -509,8 +508,8 @@
                         data: {
                             color: color,
                             size: size,
-                            me: prquantity: quantity,
-                            product_naoduct_name
+                            quantity: quantity,
+                            product_name:product_name
                         },
                         url: "/cart/data/store/" + id,
                         success: function(data) {
@@ -741,7 +740,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="#" class="product-name">${value.name} $${value.price}</a>
+                                        <a href="#" class="product-name">${value.name} ৳${value.price}</a>
                                     </td>
                                     <td class="text-center">
                                         ${value.options.color}
@@ -763,7 +762,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        $${value.subtotal}
+                                        ৳${value.subtotal}
                                     </td>
                                 </tr>`
                             });
@@ -773,12 +772,8 @@
                                     <td colspan="1" class="text-center">${response.cartQty}</td>
                                 </tr>
                                 <tr class="cart-total">
-                                    <td colspan="2" class="text-right">Total shipping</td>
-                                    <td colspan="1" class="text-center">$10</td>
-                                </tr>
-                                <tr class="cart-total">
                                     <td colspan="2" class="total text-right">Total</td>
-                                    <td colspan="1" class="total text-center">$${response.cartTotal}</td>
+                                    <td colspan="1" class="total text-center">৳${response.cartTotal}</td>
                                 </tr>`
                             $('#cartPage').html(rows);
                         }
@@ -794,10 +789,6 @@
                         success: function(data) {
                             cart();
                             miniCart();
-                            // couponCalculation();
-                            // $('#couponField').show();
-                            // $('#coupon_name').val('');
-                            //  start message
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'top-end',
