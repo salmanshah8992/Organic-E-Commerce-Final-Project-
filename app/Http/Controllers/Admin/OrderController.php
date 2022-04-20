@@ -36,6 +36,20 @@ class OrderController extends Controller
         return view('backend.orders.delivered',compact('orders'));
     }
 
+    public function cancelOrders(){
+        $orders = Order::where('status',3)->orderBy('id','DESC')->get();
+        return view('backend.orders.cancel',compact('orders'));
+    }
+
+    // cancel orders
+    public function cancelDeliver($id){
+        Order::findOrFail($id)->update([
+                'status' => 3,
+                'confirmed_date' => Carbon::now()
+        ]);
+        return redirect()->route('cancel-orders');
+    }
+
     // confirm order
     public function orderCOnfirm($id){
         Order::findOrFail($id)->update([

@@ -23,14 +23,14 @@ class CheckoutController extends Controller
     //get district with ajax
     public function getDistrictWithAjax($division_id)
     {
-        $ship = ShipDistrict::where('division_id', $division_id)->orderBy('district_name', 'ASC')->get();
+        $ship = ShipDistrict::where('division_id', $division_id)->orderBy('district_name', 'Desc')->get();
         return json_encode($ship);
     }
 
     //  get state with ajax
     public function getStateWithAjax($district_id)
     {
-        $ship = ShipState::where('district_id', $district_id)->orderBy('state_name', 'ASC')->get();
+        $ship = ShipState::where('district_id', $district_id)->orderBy('state_name', 'Desc')->get();
         return json_encode($ship);
     }
 
@@ -42,12 +42,20 @@ class CheckoutController extends Controller
             'district_id' => 'required',
             'state_id' => 'required',
             'shipping_email' => 'required | email',
-            'shipping_phone' => 'required|numeric',
+            'shipping_phone' => 'required|numeric|digits_between:8,11', 
             'post_code' => 'required',
             'payment_method' => 'required',
         ]);
 
         $total_amount = Cart::total();
+        $carts = Cart::content();
+
+        foreach ($carts as $pro) {
+            $product = Product::where('id',$pro->id)->first();
+            if($product->product_qty < $pro->qty){
+                return Redirect()->route('checkout');
+            }
+        }
 
         $order_id = Order::insertGetId([
             'user_id' => Auth::id(),
@@ -69,7 +77,6 @@ class CheckoutController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        $carts = Cart::content();
         foreach ($carts as $cart) {
             OrderItem::insert([
                 'order_id' => $order_id,
@@ -93,6 +100,7 @@ class CheckoutController extends Controller
             'message' => 'Your Order Place Success',
             'alert-type' => 'success'
         );
+
         return Redirect()->route('user.profile')->with($notification);
     }
 

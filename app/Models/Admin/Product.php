@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    
+
     public function category()
     {
         return $this->belongsTo('App\Models\Admin\Category', 'category_id');
@@ -22,7 +22,7 @@ class Product extends Model
 
     public function subcategory()
     {
-        return $this->belongsTo('App\Models\Admin\Subcategory', 'Subcategory_id');
+        return $this->belongsTo('App\Models\Admin\Subcategory', 'subcategory_id');
     }
 
     public function user()

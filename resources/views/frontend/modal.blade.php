@@ -19,7 +19,8 @@ aria-hidden="true">
                     </div>
                     <div class="col-md-4">
                         <ul class="list-group">
-                            <li class="list-group-item">Price: <strong class="text-danger৳<span
+                            <li class="list-group-item">Price:
+                                <strong class="text-danger">৳<span
                                         id="pprice"></span> </strong>
                                 <del id="oldprice">৳</del>
                             </li>

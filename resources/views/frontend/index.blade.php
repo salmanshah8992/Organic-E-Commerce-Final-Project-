@@ -21,27 +21,15 @@
     <div class="section banners">
         <div class="container">
             <div class="row margin-10">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-10">
-                    <div class="banner-item effect">
-                        <a href="#">
-                            <img class="img-responsive" src="{{ asset('frontend') }}/img/banner/home2-banner-1.png" alt="Banner 1">
-                        </a>
+                @foreach ($banner as $item)
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-10">
+                        <div class="banner-item effect">
+                            <a href="#">
+                                <img class="img-responsive" src="{{ asset($item->banner) }}" alt="Banner 1">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-10">
-                    <div class="banner-item effect">
-                        <a href="#">
-                            <img class="img-responsive" src="{{ asset('frontend') }}/img/banner/home2-banner-2.png" alt="Banner 2">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding-10">
-                    <div class="banner-item effect">
-                        <a href="#">
-                            <img class="img-responsive" src="{{ asset('frontend') }}/img/banner/home2-banner-3.png" alt="Banner 3">
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -104,13 +92,7 @@
                                             </a>
                                         </div>
 
-                                        <div class="product-rating">
-                                            <div class="star on"></div>
-                                            <div class="star on"></div>
-                                            <div class="star on "></div>
-                                            <div class="star on"></div>
-                                            <div class="star"></div>
-                                        </div>
+                        
 
                                         <div class="product-price">
                                             <span class="sale-price">৳{{ $hot_deal->discount_price }}</span>
@@ -128,7 +110,7 @@
                                                     onclick="addToWishlist(this.id)"></i>
                                             </a>
 
-                                            <a class="quickview" href="#">
+                                            <a class="quickview" href="{{ route('product.details',$hot_deal->id) }}">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
                                         </div>
@@ -208,13 +190,13 @@
                                                 </a>
                                             </div>
 
-                                            <div class="product-rating">
+                                            {{-- <div class="product-rating">
                                                 <div class="star on"></div>
                                                 <div class="star on"></div>
                                                 <div class="star on "></div>
                                                 <div class="star on"></div>
                                                 <div class="star"></div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="product-price">
                                                 <span class="sale-price">৳{{ $product->discount_price }}</span>
@@ -227,12 +209,13 @@
                                                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                                 </a>
 
+                        
                                                 <a class="add-wishlist" href="#">
                                                     <i class="fa fa-heart" aria-hidden="true" id="{{ $product->id }}"
                                                         onclick="addToWishlist(this.id)"></i>
                                                 </a>
 
-                                                <a class="quickview" href="#">
+                                                <a class="quickview" href="{{ route('product.details',$product->id) }}">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                             </div>
@@ -261,13 +244,13 @@
                                                     </a>
                                                 </div>
 
-                                                <div class="product-rating">
+                                                {{-- <div class="product-rating">
                                                     <div class="star on"></div>
                                                     <div class="star on"></div>
                                                     <div class="star on "></div>
                                                     <div class="star on"></div>
                                                     <div class="star"></div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="product-price">
                                                     <span class="sale-price">৳{{ $product->discount_price }}</span>
@@ -285,7 +268,7 @@
                                                             onclick="addToWishlist(this.id)"></i>
                                                     </a>
 
-                                                    <a class="quickview" href="#">
+                                                    <a class="quickview" href="{{ route('product.details',$product->id) }}">
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
@@ -301,13 +284,8 @@
                     <!-- Newsletter -->
                     <div class="section newsletter">
                         <h2 class="block-title">Newsletter</h2>
-
                         <div class="block-content">
                             <p class="description">Sign up for newsletter to receive special offers and exclusive news about FreshMart products</p>
-                            <form action="#" method="post">
-                                <input type="text" placeholder="Enter Your Email">
-                                <button type="submit" class="btn btn-primary">Subscribe</button>
-                            </form>
                         </div>
                     </div>
 
@@ -323,7 +301,7 @@
                                 <div class="block-content">
                                     <div class="products owl-theme owl-carousel">
                                         @php
-                                            $fruits = App\Models\Admin\Product::where('category_id','13')->limit(4)->get();
+                                            $fruits = App\Models\Admin\Product::where('subcategory_id','35')->limit(4)->get();
                                         @endphp
                                         @foreach ($fruits as $fruit)
                                             <div class="product-item">
@@ -337,14 +315,6 @@
                                                     <a href="{{ route('product.details',$fruit->id) }}">
                                                         {{ $fruit->product_name_en }}
                                                     </a>
-                                                </div>
-
-                                                <div class="product-rating">
-                                                    <div class="star on"></div>
-                                                    <div class="star on"></div>
-                                                    <div class="star on "></div>
-                                                    <div class="star on"></div>
-                                                    <div class="star"></div>
                                                 </div>
 
                                                 <div class="product-price">
@@ -363,7 +333,7 @@
                                                             onclick="addToWishlist(this.id)"></i>
                                                     </a>
 
-                                                    <a class="quickview" href="#">
+                                                    <a class="quickview" href="{{ route('product.details',$fruit->id) }}">
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
@@ -381,7 +351,7 @@
                                 </div>
 
                                 @php
-                                    $honeys = App\Models\Admin\Product::where('category_id','14')->limit(4)->get();
+                                    $honeys = App\Models\Admin\Product::where('subcategory_id','43')->limit(4)->get();
                                 @endphp
 
                                 <div class="block-content">
@@ -401,14 +371,6 @@
                                                 </a>
                                             </div>
 
-                                            <div class="product-rating">
-                                                <div class="star on"></div>
-                                                <div class="star on"></div>
-                                                <div class="star on "></div>
-                                                <div class="star on"></div>
-                                                <div class="star"></div>
-                                            </div>
-
                                             <div class="product-price">
                                                 <span class="sale-price">৳{{ $honey->discount_price }}</span>
                                                 <span class="base-price">৳{{ $honey->selling_price }}</span>
@@ -425,7 +387,7 @@
                                                         onclick="addToWishlist(this.id)"></i>
                                                 </a>
 
-                                                <a class="quickview" href="#">
+                                                <a class="quickview" href="{{ route('product.details',$honey->id) }}">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                             </div>
@@ -486,11 +448,11 @@
                                             </div>
 
                                             <div class="product-rating">
-                                                <div class="star on"></div>
+                                                {{-- <div class="star on"></div>
                                                 <div class="star on"></div>
                                                 <div class="star on "></div>
                                                 <div class="star on"></div>
-                                                <div class="star"></div>
+                                                <div class="star"></div> --}}
                                             </div>
 
                                             <div class="product-price">
@@ -509,9 +471,13 @@
                                                         onclick="addToWishlist(this.id)"></i>
                                                 </a>
 
-                                                <a class="quickview" href="#">
+                                                <a class="quickview" href="{{ route('product.details',$recent_product->id) }}">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+
+                                                {{-- <a class="quickview" href="#">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -543,13 +509,16 @@
                         <div class="intro-item">
                             <p><img src="{{ asset('frontend') }}/img/intro-icon-1.png" alt="Intro Image"></p>
                             <h4>Always Fresh</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>At Always Fresh, food is not just fuel.
+                                 Simple, good food is a way of life where sharing food with loved ones turns everyday moments
+                                 into something special.</p>
                         </div>
 
                         <div class="intro-item">
                             <p><img src="{{ asset('frontend') }}/img/intro-icon-2.png" alt="Intro Image"></p>
                             <h4>Super Healthy</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>We subscribe to ecological agrarian methods of farming, abstaining from the use of pesticides and harmful fertilizers,
+                                to produce only the freshest food crop that is both nutritious and healthy.</p>
                         </div>
                     </div>
                 </div>
@@ -567,13 +536,17 @@
                         <div class="intro-item">
                             <p><img src="{{ asset('frontend') }}/img/intro-icon-3.png" alt="Intro Image"></p>
                             <h4>100% Natural</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>We collect all the products from our own farm & production field.After Confirming
+                            order for everyday, we started to collected product from farm & field directly.There
+                            is no middleman options. For all these reasons, it is 100% natural</p>
                         </div>
 
                         <div class="intro-item">
                             <p><img src="{{ asset('frontend') }}/img/intro-icon-4.png" alt="Intro Image"></p>
                             <h4>Premium Quality</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>To ensure the freshness & quality of our produce, we ensure that all harvesting and
+                                 packaging is done in the morning.
+                            </p>
                         </div>
                     </div>
                 </div>

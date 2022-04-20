@@ -89,9 +89,10 @@
                                     <span class="badge bg-success">Delivered</span> <br>
                                 @endif
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item" style="display: flex;justify-content:space-around;">
                                 @if ($order->status == 0)
                                     <span class="btn btn-info"><a href="{{ route('order.confirm',$order->id) }}">Confirm Order</a></span> <br>
+                                    <span class="btn btn-danger"><a href="{{ route('order.cancel',$order->id) }}">Cancel Order</a></span> <br>
                                 @elseif ($order->status == 1)
                                     <span class="btn btn-info"><a href="{{ route('order.deliver',$order->id) }}">Deliver Order</a></span> <br>
                                 @endif

@@ -40,6 +40,11 @@
             .modal{
                 z-index: 9999;
             }
+
+            .A{
+
+                margin-left:41px;
+            }
         </style>
 	</head>
 
@@ -74,7 +79,7 @@
 										<div class="dropdown-menu">
                                             @auth
                                                 <div class="item">
-                                                    <a href="{{ route('user.profile') }}" title="Log in to your customer account"><i class="fa fa-cog"></i>My Profile</a>
+                                                    <a href="{{ route('user.profile') }}" title="Log in to your customer account"><i class="fa fa-cog"></i>My Order</a>
                                                 </div>
                                                 <div class="item d-flex">
                                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
@@ -111,30 +116,16 @@
 										<div class="dropdown-toggle" data-toggle="dropdown">
 											<img src="{{ asset('frontend') }}/img/language-en.jpg" alt="Language English">
 										</div>
-										<div class="dropdown-menu">
-											<div class="item">
-												<a href="#" title="Language English"><img src="{{ asset('frontend') }}/img/language-en.jpg" alt="Language English"> English</a>
-											</div>
-											<div class="item">
-												<a href="#" title="Language French"><img src="{{ asset('frontend') }}/img/language-fr.jpg" alt="Language French"> French</a>
-											</div>
-										</div>
 									</div>
 
 									<!-- Currency -->
 									<div class="dropdown currency">
 										<div class="dropdown-toggle" data-toggle="dropdown">
-											USD
+											BD
 										</div>
 										<div class="dropdown-menu">
 											<div class="item">
-												<a href="#" title="USD">USD</a>
-											</div>
-											<div class="item">
-												<a href="#" title="EUR">EUR</a>
-											</div>
-											<div class="item">
-												<a href="#" title="GBP">GBP</a>
+												<a href="#" title="USD">BD</a>
 											</div>
 										</div>
 									</div>
@@ -184,11 +175,11 @@
 										</li>
 
 										<li>
-											<a href="#">About Us</a>
+											<a href="{{ route('about.us') }}">About Us</a>
 										</li>
 
 										<li>
-											<a href="#">Contact</a>
+											<a href="{{ route('contact.us') }}">Contact</a>
 										</li>
 									</ul>
 								</div>
@@ -229,12 +220,12 @@
 								</div>
 
 								<!-- Search -->
-								<div class="form-search">
+								{{-- <div class="form-search">
 									<form action="#" method="get">
 										<input type="text" class="form-input" placeholder="Search">
 										<button type="submit" class="fa fa-search"></button>
 									</form>
-								</div>
+								</div> --}}
 							</div>
 						</div>
 					</div>
@@ -259,22 +250,22 @@
 								<div class="block text">
 									<div class="block-content">
 										<a href="home-2.html" class="logo-footer">
-											<img src="{{ asset('frontend') }}/img/logo-2.png" alt="Logo">
+                                            <img class="img-responsive" src="http://127.0.0.1:8000/frontend/img/logo.png" alt="Logo">
 										</a>
 
-										<p>
+										{{-- <p>
 											Lorem ipsum dolor sit amet, consectetur adipisc ing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>
 											Ut enim ad minim veniam, quis nostrud exercita tion ullamco laboris nisi ut aliquip.
-										</p>
+										</p> --}}
 									</div>
 								</div>
 
 								<div class="block social">
 									<div class="block-content">
-										<ul>
+										<ul class="A">
 											<li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
 											<li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
-											<li><a href="#"><i class="zmdi zmdi-dribbble"></i></a></li>
+											<li><a href="#"><i class="zmdi zmdi-whatsapp"></i></a></li>
 											<li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
 										</ul>
 									</div>
@@ -287,11 +278,10 @@
 
 									<div class="block-content">
 										<ul>
-											<li><a href="#">Specials</a></li>
-											<li><a href="#">New products</a></li>
-											<li><a href="#">Best sellers</a></li>
 											<li><a href="#">Terms and conditions</a></li>
-											<li><a href="#">Our stores</a></li>
+                                            <li>
+                                                <a href="{{ route('about.us') }}">About Us</a>
+                                            </li>
 											<li><a href="#">Contact us</a></li>
 										</ul>
 									</div>
@@ -299,17 +289,15 @@
 							</div>
 
 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
+
 								<div class="block menu">
 									<h2 class="block-title">Your Account</h2>
 
 									<div class="block-content">
 										<ul>
-											<li><a href="#">My orders</a></li>
-											<li><a href="#">My merchandise returns</a></li>
-											<li><a href="#">My credit slips</a></li>
-											<li><a href="#">My addresses</a></li>
-											<li><a href="#">My personal info</a></li>
-											<li><a href="#">My vouchers</a></li>
+                                            {{-- <a href="{{ route('user.profile') }}">My Order</a> --}}
+											<li><a href="{{ route('view.wishlist') }}">My Wishlists</a></li>
+
 										</ul>
 									</div>
 								</div>
@@ -326,7 +314,8 @@
 													<i class="zmdi zmdi-home"></i>
 												</div>
 												<div>
-													<span>123 Suspendis matti, VST District, NY Accums, North American</span>
+													<span>Salman Mansion (9th floor),Mogbazar ,
+                                                        New Eskaton ,Romna Dhaka-1217 </span>
 												</div>
 											</div>
 											<div class="item d-flex">
@@ -334,7 +323,7 @@
 													<i class="zmdi zmdi-phone-in-talk"></i>
 												</div>
 												<div>
-													<span>0123-456-78910<br>0987-654-32100</span>
+													<span>0191-471-6755<br>0152-141-5098</span>
 												</div>
 											</div>
 											<div class="item d-flex">
@@ -342,7 +331,7 @@
 													<i class="zmdi zmdi-email"></i>
 												</div>
 												<div>
-													<span><a href="mailto:support@domain.com">support@domain.com</a><br><a href="mailto:contact@domain.com">contact@domain.com</a></span>
+													<span><a href="mailto:support@domain.com">support@organicecommerce.com</a><br><a href="mailto:contact@organicecommerce.com">contact@organicecommerce.com</a></span>
 												</div>
 											</div>
 										</div>
@@ -357,10 +346,10 @@
 				<div class="footer-copyright text-center">
 					<div class="container">
 						<div class="payment">
-							<img src="{{ asset('frontend') }}/img/payment.png" alt="Payment">
+							<img src="{{ asset('frontend') }}/img/paymentss.png" alt="Payment">
 						</div>
 
-								<div class="copyright"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></div>
+								<div class="copyright"><a>Organic E-commerce</a></div>
 							</div>
 				</div>
 			</footer>
@@ -448,14 +437,14 @@
                             $("#pimage").attr("src",data.product.product_thambnail);
                             $('#product_id').val(id);
                             $('#qty').val(1);
+                            console.log(data.product.discount_price);
                             //product price
                             if (data.product.discount_price == null) {
-                                $('#pprice').text('');
                                 $('#oldprice').text('');
                                 $('#pprice').text(data.product.selling_price);
                             } else {
+                                $('#oldprice').text('');
                                 $('#pprice').text(data.product.discount_price);
-                                $('#oldprice').text(data.product.selling_price);
                             }
 
                             // //stock
@@ -562,7 +551,7 @@
                                                     <a href="#">${value.name}</a>
                                                 </div>
                                                 <div>
-                                                    ${value.qty} x <span class="product-price">$${value.price}</span>
+                                                    ${value.qty} x <span class="product-price">৳${value.price}</span>
                                                 </div>
                                             </td>
                                             <td class="action">

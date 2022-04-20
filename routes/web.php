@@ -13,8 +13,10 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingAreaController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CheckoutController;
 use App\Models\Admin\Product;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,11 +45,20 @@ Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', fun
 })->name('dashboard');
 
 
-Route::post('/logout', [AdminController::class, 'destroy'])
-    ->name('logout');
+Route::post('/logout', [AdminController::class, 'destroy'])->name('logout');
+
+Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth.admin:admin')->name('admin.logout');
+
+// Route::post('/admin/logout', [AdminController::class, 'destroy'])->middleware('auth:admin')->name('admin.logout');
 
 Route::get('/dashboard', [IndexController::class, 'index'])->middleware(['auth:sanctum,web', 'verified']);
 
+// routes for brand
+Route::prefix('banner/')->group(function () {
+    Route::get('show', [BannerController::class, 'BannerView'])->name('all.banner');
+    Route::post('add', [BannerController::class, 'BannerAdd'])->name('add.banner');
+    Route::get('delete/{id}', [BannerController::class, 'BannerDelete'])->name('delete.banner');
+});
 // routes for brand
 Route::prefix('brand/')->group(function () {
     Route::get('show', [Brancontroller::class, 'BrandView'])->name('all.brand');
@@ -149,25 +160,25 @@ Route::get('cart/remove/{id}', [CartController::class, 'destory']);
 Route::get('/cart/increment/{id}', [CartController::class, 'cartIncrement']);
 Route::get('/cart/decrement/{id}', [CartController::class, 'cartDecrement']);
 
+
 //checkout
 Route::get('user/checkout', [CartController::class, 'checkoutCreate'])->name('checkout');
 Route::get('district-get/ajax/{division_id}', [CheckoutController::class, 'getDistrictWithAjax']);
 Route::get('state-get/ajax/{district_id}', [CheckoutController::class, 'getStateWithAjax']);
 Route::post('/order/confirm', [CheckoutController::class, 'ConfirmOrder'])->name('checkout.store');
 
-
-// user profile
-
 Route::get('user/profile/view', [CheckoutController::class, 'UserProfile'])->name('user.profile');
 Route::get('user/profile/order/items/{id}', [CheckoutController::class, 'UserProfileItems'])->name('user.profile.order.items');
 Route::get('subcatgory/wise/product/{id}', [CheckoutController::class, 'SubcategoryProduct'])->name('subcategory.product');
 Route::get('category/wise/product/{id}', [CheckoutController::class, 'CategoryProduct'])->name('category.product');
 
-//orders
+
 Route::get('pending-orders',[OrderController::class,'pendingOrder'])->name('pending-orders');
+Route::get('cancel/order/{id}',[OrderController::class,'cancelDeliver'])->name('order.cancel');
 Route::get('orders-view/{id}',[OrderController::class,'viewOrders']);
 Route::get('processing-orders',[OrderController::class,'processingOrder'])->name('processing-orders');
 Route::get('delivered-orders',[OrderController::class,'deliveredOrders'])->name('delivered-orders');
+Route::get('cancel-orders',[OrderController::class,'cancelOrders'])->name('cancel-orders');
 Route::get('confirm/order/{id}',[OrderController::class,'orderCOnfirm'])->name('order.confirm');
 Route::get('deliver/order/{id}',[OrderController::class,'orderDeliver'])->name('order.deliver');
 
@@ -179,3 +190,7 @@ Route::get('/get/donut', [AdminController::class, 'DoughnutChartOne']);
 Route::get('/get/bar', [AdminController::class, 'barChart']);
 //for line
 Route::get('/get/line', [AdminController::class, 'lineChart']);
+
+// about us
+Route::get('/about/us', [IndexController::class, 'AboutUs'])->name('about.us');
+Route::get('/contact/us', [IndexController::class, 'ContactUs'])->name('contact.us');

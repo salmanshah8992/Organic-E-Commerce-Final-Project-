@@ -39,7 +39,7 @@
                             <img src="{{ asset($item->product_thambnail) }}" alt="" style="height: 60px; width:60px;">
                         </td>
                         <td>{{ $item->product_name_en }}</td>
-                        <td>{{ $item->selling_price }}$</td>
+                        <td>{{ $item->selling_price }}৳</td>
                         <td>{{ $item->product_qty }}</td>
                         <td>
                           @if ($item->discount_price == NULL)

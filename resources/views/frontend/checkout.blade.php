@@ -8,13 +8,16 @@
         font-weight: 800;
         font-size: 14px;
     }
+    .left_col{
+        margin-top: 59px;
+    }
 </style>
 <div class="breadcrumb">
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li class='active'>Checkout</li>
+                <li class='active'><b>Checkout</b></li>
             </ul>
         </div><!-- /.breadcrumb-inner -->
     </div><!-- /.container -->
@@ -38,7 +41,7 @@
                                         <div class="row">
                                             <!-- already-registered-login -->
                                             <div class="col-md-6 col-sm-6 already-registered-login">
-                                                <h4 class="checkout-subtitle">Shipping Address?</h4>
+                                                <h4 class="checkout-subtitle"><b> Shipping Address?</b></h4><br>
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1">Name
                                                         <span>*</span></label>
@@ -71,7 +74,7 @@
                                                     <input type="text"
                                                         class="form-control unicase-form-control text-input"
                                                         name="shipping_phone" id="exampleInputEmail1"
-                                                        placeholder="phone number"  value="{{ Auth::user()->phone }}"
+                                                        placeholder="Phone Number"  value="{{ Auth::user()->phone }}"
                                                         >
                                                         @error('shipping_phone')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -94,7 +97,7 @@
                                             </div>
                                             <!-- already-registered-login -->
 
-                                            <div class="col-md-6 col-sm-6 already-registered-login">
+                                            <div class="col-md-6 left_col col-sm-6 already-registered-login">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Select Division: <span
                                                             class="tx-danger">*</span></label>
@@ -137,12 +140,21 @@
                                                     @enderror
                                                 </div>
 
+
                                                 <div class="form-group">
+                                                    <label class="info-title" for="exampleInputEmail1">Transaction ID
+                                                        <span></span></label>
+                                                    <input type="text"
+                                                        class="form-control unicase-form-control text-input"
+                                                        name="notes" id="exampleInputEmail1" placeholder="Transaction ID">
+                                                </div>
+
+                                                {{-- <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1">Notes
                                                         <span>*</span></label>
                                                     <textarea name="notes" class="form-control" id="" cols="30" rows="5"
                                                         placeholder="notes"  ></textarea>
-                                                </div>
+                                                </div> --}}
 
                                             </div>
                                         </div>
@@ -172,7 +184,7 @@
                                                     {{ $item->qty }}
                                                     <Strong>Color:</Strong>
                                                     {{ $item->options->color }}
-                                                    <Strong>Size:</Strong>
+                                                    <Strong>Amount:</Strong>
                                                     {{ $item->options->size }}
                                                 </li>
                                                 <br>
@@ -202,16 +214,16 @@
                                             <hr>
                                             <li>
                                                 <input type="radio" name="payment_method" value="Bkash">
-                                                <label for="">Bkash(01521415098)</label>
+                                                <label for="">Bkash(01914716755)</label>
                                             </li>
                                             <li>
                                                 <input type="radio" name="payment_method" value="Nagad">
-                                                <label for="">Nagad(01914716755)</label>
+                                                <label for="">Nagad(01521415098)</label>
                                             </li>
 
                                             <li>
                                                 <input type="radio" name="payment_method" value="hand_cash">
-                                                <label for="">Hand Cash</label>
+                                                <label for="">Rocket(01914716755)</label>
                                             </li>
 
                                             <li>
@@ -302,4 +314,4 @@
 
 </script>
 
-@endsection
+@endsection    BKash_Logo.png

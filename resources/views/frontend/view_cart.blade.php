@@ -12,7 +12,7 @@
                         <th class="width-100 text-center">Image</th>
                         <th class="width-200 text-center">Name</th>
                         <th class="width-200 text-center">Color</th>
-                        <th class="width-200 text-center">Size</th>
+                        <th class="width-200 text-center">Amount</th>
                         <th class="width-100 text-center">Qty</th>
                         <th class="width-100 text-center">Sub Total</th>
                     </tr>

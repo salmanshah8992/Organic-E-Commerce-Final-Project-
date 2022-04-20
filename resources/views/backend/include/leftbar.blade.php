@@ -1,7 +1,7 @@
 <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
       <ul class="nav navbar-nav flex-row">
-        <li class="nav-item me-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template-dark/index.html"><span class="brand-logo">
+        <li class="nav-item me-auto"><a class="navbar-brand" href=""><span class="brand-logo">
               <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
                 <defs>
                   <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
@@ -32,13 +32,16 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
+        <li class=" nav-item"><a class="d-flex align-items-center" ><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
           <ul class="menu-content">
-            <li class="active"><a class="d-flex align-items-center" href="dashboard-ecommerce.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">eCommerce</span></a>
+            <li class="active"><a class="d-flex align-items-center" href="{{ route('dashboard') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Organic Ecommerce</span></a>
             </li>
           </ul>
         </li>
         <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
+        </li>
+
+        <li class=" nav-item"><a  href="{{ route('all.banner') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Banner</span></a>
         </li>
 
         <li class=" nav-item"><a  href="{{ route('all.brand') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Brand</span></a>
@@ -67,6 +70,7 @@
               <li class=" nav-item"><a href="{{ route('view.product') }}"  class="d-flex align-items-center"><i data-feather="mail"></i>View Product</a></li>
           </ul>
       </li>
+
       <li>
         <a href="javascript: void(0);" class="has-arrow waves-effect">
           <i data-feather="mail"></i>
@@ -81,16 +85,20 @@
         <ul class="sub-menu" aria-expanded="false">
             <li class=" nav-item"><a href="{{ route('delivered-orders') }}"  class="d-flex align-items-center"><i data-feather="mail"></i>Delivered Orders</a></li>
         </ul>
+        <ul class="sub-menu" aria-expanded="false">
+            <li class=" nav-item"><a href="{{ route('cancel-orders') }}"  class="d-flex align-items-center"><i data-feather="mail"></i>Cancel Orders</a></li>
+        </ul>
     </li>
-      <li class=" nav-item"><a  href="{{ route('division') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Division</span></a>
-      </li>
 
-      <li class=" nav-item"><a  href="{{ route('district') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">District</span></a>
-      </li>
+    <li class=" nav-item"><a  href="{{ route('division') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Division</span></a>
+    </li>
 
-      <li class=" nav-item"><a  href="{{ route('state') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">State</span></a>
-      </li>
+    <li class=" nav-item"><a  href="{{ route('district') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">District</span></a>
+    </li>
 
-      </ul>
-    </div>
-  </div>
+    <li class=" nav-item"><a  href="{{ route('state') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">State</span></a>
+    </li>
+
+    </ul>
+</div>
+</div>
