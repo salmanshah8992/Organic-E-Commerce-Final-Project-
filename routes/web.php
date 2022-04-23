@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\Brancontroller;
+use App\Http\Controllers\Admin\Backendcontroller;
 use App\Http\Controllers\Admin\Couponcontroller;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -194,3 +195,6 @@ Route::get('/get/line', [AdminController::class, 'lineChart']);
 // about us
 Route::get('/about/us', [IndexController::class, 'AboutUs'])->name('about.us');
 Route::get('/contact/us', [IndexController::class, 'ContactUs'])->name('contact.us');
+
+//route for show users
+Route::get('/user/list', [BackendController::class, 'UserView'])->name('user.list');

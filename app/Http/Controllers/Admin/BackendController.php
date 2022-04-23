@@ -11,4 +11,12 @@ use Illuminate\Support\Facades\Hash;
 class BackendController extends Controller
 {
     
+    public function UserView(){
+        $users= User::all();
+        return view('backend.user.view_user',compact('users'));
+    }
+
+
+
+
 }

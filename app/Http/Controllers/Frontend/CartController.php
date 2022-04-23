@@ -24,7 +24,7 @@ class CartController extends Controller
         $product = Product::findOrFail($id);
 
         if($product->product_qty < $request->quantity){
-            return response()->json(['error' => 'Order Quantity is greater than Stock '.$product->product_qty]);
+            return response()->json(['error' => 'Order Quantity is greater than Stock & Please insert valid amount '.$product->product_qty]);
         }else{
             if ($product->discount_price == NULL) {
                 Cart::add([

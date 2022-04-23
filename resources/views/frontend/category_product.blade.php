@@ -110,9 +110,15 @@
                                                         onclick="addToWishlist(this.id)"></i>
                                                 </a>
 
-                                                <a class="quickview" href="#">
+
+                                             
+
+                                                <a class="quickview" href="{{ route('product.details',$product->id) }}">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+ 
+
+
                                             </div>
                                         </div>
                                     </div>

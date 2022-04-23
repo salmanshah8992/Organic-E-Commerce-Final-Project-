@@ -1,82 +1,90 @@
 @extends('layouts.frontend_master')
 
 @section('main_content')
-<div id="content" class="site-content">
-    <!-- Breadcrumb -->
-    <div id="breadcrumb">
-        <div class="container">
-            <h2 class="title">{{ $product_detail->product_name_en }}</h2>
+    <div id="content" class="site-content">
+        <!-- Breadcrumb -->
+        <div id="breadcrumb">
+            <div class="container">
+                <h2 class="title">{{ $product_detail->product_name_en }}</h2>
 
-            <ul class="breadcrumb">
-                <li><a href="#" title="Home">Home</a></li>
-                <li><a href="#" title="Fruit">{{ $product_detail->category->category_name_en }}</a></li>
-                <li><span>{{ $product_detail->subcategory->subcategory_name_en }}</span></li>
-            </ul>
+                <ul class="breadcrumb">
+                    <li><a href="#" title="Home">Home</a></li>
+                    <li><a href="#" title="Fruit">{{ $product_detail->category->category_name_en }}</a></li>
+                    <li><span>{{ $product_detail->subcategory->subcategory_name_en }}</span></li>
+                </ul>
+            </div>
         </div>
-    </div>
 
 
-    <div class="container">
-        <div class="row">
-            <!-- Sidebar -->
-            <div id="left-column" class="sidebar col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <!-- Block - Product Categories -->
-                <div class="block product-categories">
-                    <h3 class="block-title">Categories</h3>
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div id="left-column" class="sidebar col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <!-- Block - Product Categories -->
+                    <div class="block product-categories">
+                        <h3 class="block-title">Categories</h3>
 
-                    <div class="block-content">
-                        @foreach ($categorys as $category)
-                        <div class="item">
-                            <span class="arrow collapsed" data-toggle="collapse" data-target="#cat{{ $category->id }}" aria-expanded="false" role="button">
-                                <i class="zmdi zmdi-minus"></i>
-                                <i class="zmdi zmdi-plus"></i>
-                            </span>
+                        <div class="block-content">
+                            @foreach ($categorys as $category)
+                                <div class="item">
+                                    <span class="arrow collapsed" data-toggle="collapse"
+                                        data-target="#cat{{ $category->id }}" aria-expanded="false" role="button">
+                                        <i class="zmdi zmdi-minus"></i>
+                                        <i class="zmdi zmdi-plus"></i>
+                                    </span>
 
-                            <a class="category-title" href="{{ route('category.product',$category->id) }}">{{ $category->category_name_en }}</a>
-                            <div class="sub-category collapse" id="cat{{ $category->id }}" aria-expanded="true" role="main">
-                                @php
-                                    $subcategorys = App\Models\Admin\Subcategory::where('category_id',$category->id)->get();
-                                @endphp
-                                @foreach ($subcategorys as $subcategory)
-                                    <div class="item">
-                                        <a href="{{ route('subcategory.product',$subcategory->id) }}">{{ $subcategory->subcategory_name_en }}</a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-
-
-                <!-- Block - Products -->
-                <div class="block products-block layout-5">
-                    <h3 class="block-title">Special Offer</h3>
-
-                    <div class="block-content">
-                        @php
-                            $special_offers = App\Models\Admin\Product::where('special_offer','1')->limit(2)->get();
-                        @endphp
-                        @foreach ($special_offers as $special_offer)
-                        <div class="product-item">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-12 col-xs-12 product-left">
-                                    <div class="product-image">
-                                        <a href="{{ route('product.details',$special_offer->id) }}">
-                                            <img class="img-responsive" src="{{ url($special_offer->product_thambnail) }}" alt="Product Image">
-                                        </a>
+                                    <a class="category-title"
+                                        href="{{ route('category.product', $category->id) }}">{{ $category->category_name_en }}</a>
+                                    <div class="sub-category collapse" id="cat{{ $category->id }}" aria-expanded="true"
+                                        role="main">
+                                        @php
+                                            $subcategorys = App\Models\Admin\Subcategory::where('category_id', $category->id)->get();
+                                        @endphp
+                                        @foreach ($subcategorys as $subcategory)
+                                            <div class="item">
+                                                <a
+                                                    href="{{ route('subcategory.product', $subcategory->id) }}">{{ $subcategory->subcategory_name_en }}</a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
+                            @endforeach
+                        </div>
+                    </div>
 
-                                <div class="col-md-8 col-sm-12 col-xs-12 product-right">
-                                    <div class="product-info">
-                                        <div class="product-title">
-                                            <a href="{{ route('product.details',$special_offer->id) }}">
-                                                {{ $special_offer->product_name_en }}
-                                            </a>
+
+                    <!-- Block - Products -->
+                    <div class="block products-block layout-5">
+                        <h3 class="block-title">Special Offer</h3>
+
+                        <div class="block-content">
+                            @php
+                                $special_offers = App\Models\Admin\Product::where('special_offer', '1')
+                                    ->limit(2)
+                                    ->get();
+                            @endphp
+                            @foreach ($special_offers as $special_offer)
+                                <div class="product-item">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-12 col-xs-12 product-left">
+                                            <div class="product-image">
+                                                <a href="{{ route('product.details', $special_offer->id) }}">
+                                                    <img class="img-responsive"
+                                                        src="{{ url($special_offer->product_thambnail) }}"
+                                                        alt="Product Image">
+                                                </a>
+                                            </div>
                                         </div>
 
-                                        {{-- <div class="product-rating">
+                                        <div class="col-md-8 col-sm-12 col-xs-12 product-right">
+                                            <div class="product-info">
+                                                <div class="product-title">
+                                                    <a href="{{ route('product.details', $special_offer->id) }}">
+                                                        {{ $special_offer->product_name_en }}
+                                                    </a>
+                                                </div>
+
+                                                {{-- <div class="product-rating">
                                             <div class="star on"></div>
                                             <div class="star on"></div>
                                             <div class="star on"></div>
@@ -85,140 +93,151 @@
                                             <span class="review-count">(3 Reviews)</span>
                                         </div> --}}
 
-                                        <div class="product-price">
-                                            <span class="sale-price">৳{{ $special_offer->discount_price }}</span>
-                                            <span class="base-price">৳{{ $special_offer->selling_price }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-
-                <!-- Product Tags -->
-                <div class="block tags product-tags">
-                    <h3 class="block-title">Product Tags</h3>
-
-                    <div class="block-content">
-                        @php
-                            $tags_en = App\Models\Admin\Product::groupBy('product_tags_en')->orderBy('id','DESC')->select('product_tags_en')->limit(5)->get();
-                            $tags_en_all = App\Models\Admin\Product::groupBy('product_tags_en')->orderBy('id','DESC')->select('product_tags_en')->get();
-                        @endphp
-                        <ul class="featureTags">
-                            @foreach ($tags_en as $tag)
-                            <li>
-                                <a href="#" title="Show products matching tag Hot Trend">{{ str_replace(',',' ',$tag->product_tags_en) }}</a>
-                            </li>
-                            @endforeach
-                        </ul>
-                        <ul class="allTags" style="display:none;">
-                            @foreach ($tags_en_all as $tag)
-                            <li>
-                                <a href="#" title="Show products matching tag Hot Trend">{{ str_replace(',',' ',$tag->product_tags_en) }}</a>
-                            </li>
-                            @endforeach
-                        </ul>
-                        <ul>
-                            <li>
-                                <a href="#" title="Show products matching tag Hot Trend" id="seeMore">See More</a>
-                            </li>
-                        </ul>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page Content -->
-            <div id="center-column" class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                <div class="product-detail">
-                    <div class="products-block layout-5">
-                        <div class="product-item">
-                            <div class="product-title">
-                                {{ $product_detail->product_name_en }}
-                            </div>
-
-                            <div class="row">
-                                <div class="product-left col-md-5 col-sm-5 col-xs-12">
-                                    <div class="product-image horizontal">
-                                        <div class="main-image">
-                                            <img class="img-responsive" src="{{ url($product_detail->product_thambnail )}}" alt="Product Image">
-                                        </div>
-
-                                        <div class="thumb-images owl-theme owl-carousel">
-                                            @foreach ($product_multi as $product_mul)
-                                              <img class="img-responsive" src="{{ url($product_mul->photo_name)}}" alt="Product Image">
-                                            @endforeach
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="product-right col-md-7 col-sm-7 col-xs-12">
-                                    <div class="product-info">
-                                        <div class="product-price">
-                                            <span class="sale-price">৳{{ $product_detail->discount_price }}</span>
-                                            <span class="base-price">৳{{ $product_detail->selling_price }}</span>
-                                        </div>
-
-                                        <div class="product-stock">
-                                            <span class="availability">Availability :</span><i class="fa fa-check-square-o" aria-hidden="true"></i>In stock
-                                        </div>
-
-                                        <div class="product-short-description">
-                                            {!! $product_detail->long_descp_en !!}
-                                        </div>
-
-                                        <div class="product-variants border-bottom">
-                                            @if ($product_detail->product_size_en == null)
-
-                                            @else
-                                            <div class="product-variants-item">
-                                                <span class="control-label">Amount :</span>
-                                                <select>
-                                                    @foreach ($produt_size as $item)
-                                                        <option value="1" title="S">{{ $item }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <div class="product-price">
+                                                    <span
+                                                        class="sale-price">৳{{ $special_offer->discount_price }}</span>
+                                                    <span
+                                                        class="base-price">৳{{ $special_offer->selling_price }}</span>
+                                                </div>
                                             </div>
-                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
 
+                    <!-- Product Tags -->
+                    <div class="block tags product-tags">
+                        <h3 class="block-title">Product Tags</h3>
 
-                                      {{-- Add to card & wishlist start --}}
+                        <div class="block-content">
+                            @php
+                                $tags_en = App\Models\Admin\Product::groupBy('product_tags_en')
+                                    ->orderBy('id', 'DESC')
+                                    ->select('product_tags_en')
+                                    ->limit(5)
+                                    ->get();
+                                $tags_en_all = App\Models\Admin\Product::groupBy('product_tags_en')
+                                    ->orderBy('id', 'DESC')
+                                    ->select('product_tags_en')
+                                    ->get();
+                            @endphp
+                            <ul class="featureTags">
+                                @foreach ($tags_en as $tag)
+                                    <li>
+                                        <a href="#"
+                                            title="Show products matching tag Hot Trend">{{ str_replace(',', ' ', $tag->product_tags_en) }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <ul class="allTags" style="display:none;">
+                                @foreach ($tags_en_all as $tag)
+                                    <li>
+                                        <a href="#"
+                                            title="Show products matching tag Hot Trend">{{ str_replace(',', ' ', $tag->product_tags_en) }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <ul>
+                                <li>
+                                    <a href="#" title="Show products matching tag Hot Trend" id="seeMore">See More</a>
+                                </li>
+                            </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Page Content -->
+                <div id="center-column" class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                    <div class="product-detail">
+                        <div class="products-block layout-5">
+                            <div class="product-item">
+                                <div class="product-title">
+                                    {{ $product_detail->product_name_en }}
+                                </div>
 
+                                <div class="row">
+                                    <div class="product-left col-md-5 col-sm-5 col-xs-12">
+                                        <div class="product-image horizontal">
+                                            <div class="main-image">
+                                                <img class="img-responsive"
+                                                    src="{{ url($product_detail->product_thambnail) }}"
+                                                    alt="Product Image">
+                                            </div>
 
+                                            <div class="thumb-images owl-theme owl-carousel">
+                                                @foreach ($product_multi as $product_mul)
+                                                    <img class="img-responsive" src="{{ url($product_mul->photo_name) }}"
+                                                        alt="Product Image">
+                                                @endforeach
+                                            </div>
 
-                                      <div class="product-buttons">
-                                        <a class="add-to-cart" href="#" data-toggle="modal" data-target="#cartModal" id="27" onclick="productView(this.id)">
-                                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                        </a>
-
-
-
-                                        <a class="add-wishlist" href="#">
-                                            <i class="fa fa-heart" aria-hidden="true" id="27"
-                                                onclick="addToWishlist(this.id)"></i>
-                                        </a>
-
-
+                                        </div>
                                     </div>
 
-                
-                                        {{-- <a class="add-wishlist" href="#">
+                                    <div class="product-right col-md-7 col-sm-7 col-xs-12">
+                                        <div class="product-info">
+                                            <div class="product-price">
+                                                <span
+                                                    class="sale-price">৳{{ $product_detail->discount_price }}</span>
+                                                <span class="base-price">৳{{ $product_detail->selling_price }}</span>
+                                            </div>
+
+                                            <div class="product-stock">
+                                                <span class="availability">Availability :</span><i
+                                                    class="fa fa-check-square-o" aria-hidden="true"></i>In stock
+                                            </div>
+
+                                            <div class="product-short-description">
+                                                {!! $product_detail->long_descp_en !!}
+                                            </div>
+
+                                            <div class="product-variants border-bottom">
+                                                @if ($product_detail->product_size_en == null)
+                                                @else
+                                                    <div class="product-variants-item">
+                                                        <span class="control-label">Amount :</span>
+                                                        <select>
+                                                            @foreach ($produt_size as $item)
+                                                                <option value="1" title="S">{{ $item }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
+
+
+                                                {{-- Add to card & wishlist start --}}
+
+                                                <div class="product-buttons">
+                                                    <a class="add-to-cart" href="#" data-toggle="modal"
+                                                        data-target="#cartModal" id="{{ $product_detail->id }}"
+                                                        onclick="productView(this.id)">
+                                                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                                    </a>
+
+                                                    <a class="add-wishlist" href="#">
+                                                        <i class="fa fa-heart" aria-hidden="true"
+                                                            id="{{ $product_detail->id }}"
+                                                            onclick="addToWishlist(this.id)"></i>
+                                                    </a>
+
+                                                </div>
+
+                                                {{-- <a class="add-wishlist" href="#">
                                             <i class="fa fa-heart" aria-hidden="true" id="27" onclick="addToWishlist(this.id)"></i>
                                         </a> --}}
 
-                                    
 
 
 
 
 
-                                            {{-- Add to card & wishlist End --}}
 
-                                            {{-- <div class="product-variants-item">
+                                                {{-- Add to card & wishlist End --}}
+
+                                                {{-- <div class="product-variants-item">
                                                 <span class="control-label">Color :</span>
 
                                                 <ul>
@@ -248,9 +267,9 @@
                                                     </li>
                                                 </ul>
                                             </div> --}}
-                                        </div>
+                                            </div>
 
-                                        {{-- <div class="product-add-to-cart border-bottom">
+                                            {{-- <div class="product-add-to-cart border-bottom">
                                             <div class="product-quantity">
                                                 <span class="control-label">QTY :</span>
                                                 <div class="qty">
@@ -276,7 +295,7 @@
                                             </div>
                                         </div> --}}
 
-                                        {{-- <div class="product-share border-bottom">
+                                            {{-- <div class="product-share border-bottom">
                                             <div class="item">
                                                 <a href="#"><i class="zmdi zmdi-share" aria-hidden="true"></i><span class="text">Share</span></a>
                                             </div>
@@ -311,123 +330,152 @@
                                             </div>
                                         </div> --}}
 
-                                        <div class="product-extra">
-                                            {{-- <div class="item">
+                                            <div class="product-extra">
+                                                {{-- <div class="item">
                                                 <span class="control-label">Review :</span><span class="control-label">E-02154</span>
                                             </div> --}}
-                                            @php
-                                                $category = App\Models\Admin\Product::find($product_detail->id);
-                                                $cat_name = App\Models\Admin\Category::where('id',$category->category_id)->first();
-                                            @endphp
-                                            <div class="item">
-                                                <span class="control-label">Category :</span>
-                                                <a href="#" title="Vegetables">{{  $cat_name->category_name_en }}</a>
-                                            </div>
-                                            <div class="item">
-                                                <span class="control-label">Tags :</span>
-                                                <a href="#" title="tag">{{  $product_detail->product_tags_en }}</a>
+                                                @php
+                                                    $category = App\Models\Admin\Product::find($product_detail->id);
+                                                    $cat_name = App\Models\Admin\Category::where('id', $category->category_id)->first();
+                                                @endphp
+                                                <div class="item">
+                                                    <span class="control-label">Category :</span>
+                                                    <a href="#" title="Vegetables">{{ $cat_name->category_name_en }}</a>
+                                                </div>
+                                                <div class="item">
+                                                    <span class="control-label">Tags :</span>
+                                                    <a href="#" title="tag">{{ $product_detail->product_tags_en }}</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="product-tab">
-                                <!-- Tab Navigation -->
-                                <div class="tab-nav">
-                                    <ul>
-                                        <li class="active">
-                                            <a data-toggle="tab" href="#description">
-                                                <span>Description</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <!-- Tab Content -->
-                                <div class="tab-content">
-                                    <!-- Description -->
-                                    <div role="tabpanel" class="tab-pane fade in active" id="description">
-                                        <p>{!!  $product_detail->long_descp_en !!}</p>
+                                <div class="product-tab">
+                                    <!-- Tab Navigation -->
+                                    <div class="tab-nav">
+                                        <ul>
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#description">
+                                                    <span>Description</span>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
 
-                                    <!-- Product Tag -->
-                                    <div role="tabpanel" class="tab-pane fade" id="additional-information">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
-                                    </div>
+                                    <!-- Tab Content -->
+                                    <div class="tab-content">
+                                        <!-- Description -->
+                                        <div role="tabpanel" class="tab-pane fade in active" id="description">
+                                            <p>{!! $product_detail->long_descp_en !!}</p>
+                                        </div>
 
-                                    <!-- Review -->
-                                    <div role="tabpanel" class="tab-pane fade" id="review">
-                                        <div class="reviews">
-                                            <div class="comments-list">
-                                                <div class="item d-flex">
-                                                    <div class="comment-left">
-                                                        <div class="avatar">
-                                                            <img src="img/avatar.jpg" alt="" width="70" height="70">
-                                                        </div>
-                                                        {{-- <div class="product-rating">
+                                        <!-- Product Tag -->
+                                        <div role="tabpanel" class="tab-pane fade" id="additional-information">
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                                                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                                                parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                                                pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                                pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                                                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                                                parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                                                pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                                pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Lorem ipsum
+                                                dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
+                                                montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                                                pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                                pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+                                        </div>
+
+                                        <!-- Review -->
+                                        <div role="tabpanel" class="tab-pane fade" id="review">
+                                            <div class="reviews">
+                                                <div class="comments-list">
+                                                    <div class="item d-flex">
+                                                        <div class="comment-left">
+                                                            <div class="avatar">
+                                                                <img src="img/avatar.jpg" alt="" width="70" height="70">
+                                                            </div>
+                                                            {{-- <div class="product-rating">
                                                             <div class="star on"></div>
                                                             <div class="star on"></div>
                                                             <div class="star on"></div>
                                                             <div class="star on"></div>
                                                             <div class="star on"></div>
                                                         </div> --}}
-                                                    </div>
-                                                    <div class="comment-body">
-                                                        <div class="comment-meta">
-                                                            <span class="author">Peter</span> - <span class="time">June 02, 2018</span>
                                                         </div>
-                                                        <div class="comment-content">Look at the sunset, life is amazing, life is beautiful, life is what you make it. To succeed you must believe. When you believe, you will succeed. In life there will be road blocks but we will over come it. Celebrate success right, the only way, apple. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. </div>
+                                                        <div class="comment-body">
+                                                            <div class="comment-meta">
+                                                                <span class="author">Peter</span> - <span
+                                                                    class="time">June 02, 2018</span>
+                                                            </div>
+                                                            <div class="comment-content">Look at the sunset, life is
+                                                                amazing, life is beautiful, life is what you make it. To
+                                                                succeed you must believe. When you believe, you will
+                                                                succeed. In life there will be road blocks but we will over
+                                                                come it. Celebrate success right, the only way, apple. The
+                                                                ladies always say Khaled you smell good, I use no cologne.
+                                                                Cocoa butter is the key. </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="item d-flex">
+                                                        <div class="comment-left">
+                                                            <div class="avatar">
+                                                                <img src="img/avatar.jpg" alt="" width="70" height="70">
+                                                            </div>
+                                                            {{-- <div class="product-rating">
+                                                            <div class="star on"></div>
+                                                            <div class="star on"></div>
+                                                            <div class="star on"></div>
+                                                            <div class="star on"></div>
+                                                            <div class="star"></div>
+                                                        </div> --}}
+                                                        </div>
+                                                        <div class="comment-body">
+                                                            <div class="comment-meta">
+                                                                <span class="author">Merry</span> - <span
+                                                                    class="time">June 17, 2018</span>
+                                                            </div>
+                                                            <div class="comment-content">Look at the sunset, life is
+                                                                amazing, life is beautiful, life is what you make it. To
+                                                                succeed you must believe. When you believe, you will
+                                                                succeed. In life there will be road blocks but we will over
+                                                                come it. Celebrate success right, the only way, apple. The
+                                                                ladies always say Khaled you smell good, I use no cologne.
+                                                                Cocoa butter is the key. </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="item d-flex">
-                                                    <div class="comment-left">
-                                                        <div class="avatar">
-                                                            <img src="img/avatar.jpg" alt="" width="70" height="70">
-                                                        </div>
-                                                        {{-- <div class="product-rating">
-                                                            <div class="star on"></div>
-                                                            <div class="star on"></div>
-                                                            <div class="star on"></div>
-                                                            <div class="star on"></div>
+                                                <div class="review-form">
+                                                    <h4 class="title">Write a review</h4>
+
+                                                    <form action="#" method="post" class="form-validate">
+                                                        <div class="form-group">
+                                                            {{-- <div class="text">Your Rating</div> --}}
+                                                            {{-- <div class="product-rating">
+                                                            <div class="star"></div>
+                                                            <div class="star"></div>
+                                                            <div class="star"></div>
+                                                            <div class="star"></div>
                                                             <div class="star"></div>
                                                         </div> --}}
-                                                    </div>
-                                                    <div class="comment-body">
-                                                        <div class="comment-meta">
-                                                            <span class="author">Merry</span> - <span class="time">June 17, 2018</span>
                                                         </div>
-                                                        <div class="comment-content">Look at the sunset, life is amazing, life is beautiful, life is what you make it. To succeed you must believe. When you believe, you will succeed. In life there will be road blocks but we will over come it. Celebrate success right, the only way, apple. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. </div>
-                                                    </div>
+
+                                                        <div class="form-group">
+                                                            <div class="text">You review<sup
+                                                                    class="required">*</sup></div>
+                                                            <textarea id="comment" name="comment" cols="45" rows="6" aria-required="true"></textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <button class="btn btn-primary">Send your review</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                            </div>
-
-                                            <div class="review-form">
-                                                <h4 class="title">Write a review</h4>
-
-                                                <form action="#" method="post" class="form-validate">
-                                                    <div class="form-group">
-                                                        {{-- <div class="text">Your Rating</div> --}}
-                                                        {{-- <div class="product-rating">
-                                                            <div class="star"></div>
-                                                            <div class="star"></div>
-                                                            <div class="star"></div>
-                                                            <div class="star"></div>
-                                                            <div class="star"></div>
-                                                        </div> --}}
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="text">You review<sup class="required">*</sup></div>
-                                                        <textarea id="comment" name="comment" cols="45" rows="6" aria-required="true"></textarea>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <button class="btn btn-primary">Send your review</button>
-                                                    </div>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -435,35 +483,35 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Related Products -->
-                <div class="products-block related-products">
-                    <div class="block-title">
-                        <h2 class="title">Related <span>Products</span></h2>
-                        @php
-                           $category = App\Models\Admin\Product::find($product_detail->id);
-                           $related_products = App\Models\Admin\Product::where('category_id',$category->category_id)->get();
-                        @endphp
-                    </div>
+                    <!-- Related Products -->
+                    <div class="products-block related-products">
+                        <div class="block-title">
+                            <h2 class="title">Related <span>Products</span></h2>
+                            @php
+                                $category = App\Models\Admin\Product::find($product_detail->id);
+                                $related_products = App\Models\Admin\Product::where('category_id', $category->category_id)->get();
+                            @endphp
+                        </div>
 
-                    <div class="block-content">
-                        <div class="products owl-theme owl-carousel">
-                            @foreach ($related_products as $related_product)
-                            <div class="product-item">
-                                <div class="product-image">
-                                    <a href="{{ route('product.details',$related_product->id) }}">
-                                        <img src="{{ url($related_product->product_thambnail) }}" alt="Product Image">
-                                    </a>
-                                </div>
+                        <div class="block-content">
+                            <div class="products owl-theme owl-carousel">
+                                @foreach ($related_products as $related_product)
+                                    <div class="product-item">
+                                        <div class="product-image">
+                                            <a href="{{ route('product.details', $related_product->id) }}">
+                                                <img src="{{ url($related_product->product_thambnail) }}"
+                                                    alt="Product Image">
+                                            </a>
+                                        </div>
 
-                                <div class="product-title">
-                                    <a href="{{ route('product.details',$related_product->id) }}">
-                                        {{ $related_product->product_name_en }}
-                                    </a>
-                                </div>
+                                        <div class="product-title">
+                                            <a href="{{ route('product.details', $related_product->id) }}">
+                                                {{ $related_product->product_name_en }}
+                                            </a>
+                                        </div>
 
-                                {{-- <div class="product-rating">
+                                        {{-- <div class="product-rating">
                                     <div class="star on"></div>
                                     <div class="star on"></div>
                                     <div class="star on "></div>
@@ -471,46 +519,47 @@
                                     <div class="star"></div>
                                 </div> --}}
 
-                                <div class="product-price">
-                                    <span class="sale-price">৳{{ $related_product->discount_price }}</span>
-                                    <span class="base-price">৳{{ $related_product->selling_price }}</span>
-                                </div>
+                                        <div class="product-price">
+                                            <span class="sale-price">৳{{ $related_product->discount_price }}</span>
+                                            <span class="base-price">৳{{ $related_product->selling_price }}</span>
+                                        </div>
 
-                                <div class="product-buttons">
-
-
-                                    <a class="add-to-cart" href="#" data-toggle="modal" data-target="#cartModal" id="{{ $related_product->id }}"
-                                        onclick="productView(this.id)">
-                                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                    </a>
-
-                                    <a class="add-wishlist" href="#">
-                                        <i class="fa fa-heart" aria-hidden="true" id="{{ $related_product->id }}"
-                                            onclick="addToWishlist(this.id)"></i>
-                                    </a>
-
-                                    <a class="quickview" href="{{ route('product.details',$related_product->id) }}">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
+                                        <div class="product-buttons">
 
 
+                                            <a class="add-to-cart" href="#" data-toggle="modal" data-target="#cartModal"
+                                                id="{{ $related_product->id }}" onclick="productView(this.id)">
+                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                            </a>
 
-                                </div>
+                                            <a class="add-wishlist" href="#">
+                                                <i class="fa fa-heart" aria-hidden="true"
+                                                    id="{{ $related_product->id }}" onclick="addToWishlist(this.id)"></i>
+                                            </a>
+
+                                            <a class="quickview"
+                                                href="{{ route('product.details', $related_product->id) }}">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+
+
+
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 @endsection
 
 @section('script')
     <script>
-        $('#seeMore').click(function(){
+        $('#seeMore').click(function() {
             event.preventDefault();
             $('.featureTags').css("display", "none");
             $('.allTags').removeAttr('style');

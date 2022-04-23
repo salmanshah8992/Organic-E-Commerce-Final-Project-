@@ -25,7 +25,7 @@
                   </g>
                 </g>
               </svg></span>
-            <h2 class="brand-text">Vuexy</h2></a></li>
+            <h2 class="brand-text">Admin Panel</h2></a></li>
         <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
       </ul>
     </div>
@@ -39,6 +39,10 @@
           </ul>
         </li>
         <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
+        </li>
+
+
+        <li class=" nav-item"><a  href="{{ route('user.list') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">User List</span></a>
         </li>
 
         <li class=" nav-item"><a  href="{{ route('all.banner') }}" class="d-flex align-items-center"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Banner</span></a>
