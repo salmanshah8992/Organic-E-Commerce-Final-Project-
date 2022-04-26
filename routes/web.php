@@ -198,3 +198,7 @@ Route::get('/contact/us', [IndexController::class, 'ContactUs'])->name('contact.
 
 //route for show users
 Route::get('/user/list', [BackendController::class, 'UserView'])->name('user.list');
+Route::get('/user/list_edit/{id}', [BackendController::class, 'UserEdit'])->name('user_list.edit');
+Route::post('/user/list_update', [BackendController::class, 'UserUpdate'])->name('user_list.update');
+Route::get('/user/list_delete/{id}', [BackendController::class, 'UserDelete'])->name('user.delete');
+Route::post('/user/cancel_order/{id}', [BackendController::class, 'UserCancelOrder'])->name('user.cancel');

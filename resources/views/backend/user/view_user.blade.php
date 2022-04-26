@@ -10,7 +10,6 @@
         <thead>
           <tr>
             <th class="wd-30p">SN</th>
-            <th class="wd-20p">ID</th>
             <th class="wd-30p">Name</th>
             <th class="wd-20p">Email</th>
             <th class="wd-20p">Action</th>
@@ -26,13 +25,12 @@
 
           <tr>
             <td>{{$sn++}}</td>
-            <td>{{ $item->id }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->email }}</td>
             <td>
-              <a href="#" class="btn btn-sm btn-primary" title="edit data"> <i class="fa fa-pencil"></i></a>
+              <a href="{{ route('user_list.edit',$item->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
 
-              <a href="#" class="btn btn-sm btn-danger" id="delete" title="delete data"><i class="fa fa-trash"></i></a>
+              <a href="{{ route('user.delete',$item->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
           @endforeach 

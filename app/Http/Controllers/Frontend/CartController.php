@@ -24,7 +24,7 @@ class CartController extends Controller
         $product = Product::findOrFail($id);
 
         if($product->product_qty < $request->quantity){
-            return response()->json(['error' => 'Order Quantity is greater than Stock & Please insert valid amount '.$product->product_qty]);
+            return response()->json(['error' =>'Out of Stock & Current Stock avaivality is '.$product->product_qty]);
         }else{
             if ($product->discount_price == NULL) {
                 Cart::add([
@@ -147,7 +147,7 @@ class CartController extends Controller
                 $carts = Cart::content();
                 $cartQty = Cart::count();
                 $cartTotal = Cart::total();
-                $divisions = ShipDivision::orderBy('division_name','ASC')->get();
+                $divisions = ShipDivision::orderBy('division_name','DESC')->get();
                 return view('frontend.checkout',compact('carts','cartQty','cartTotal','divisions'));
             }else {
             $notification=array(

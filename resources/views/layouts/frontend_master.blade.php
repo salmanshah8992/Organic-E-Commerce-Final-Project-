@@ -468,7 +468,7 @@
 
                     // //stock
                     if (data.product.product_qty > 0) {
-                        $('#aviable').text('');
+                        $('#available').text('');
                         $('#stockout').text('');
                         $('#available').text('available');
                     } else {

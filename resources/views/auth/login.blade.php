@@ -36,7 +36,7 @@
 	<body class="home home-1">
 		<div id="all">
 			<!-- Header -->
-            <header id="header">
+            {{-- <header id="header">
 				<!-- Topbar -->
 				<div class="topbar">
 					<!-- Close Topbar -->
@@ -170,7 +170,7 @@
 						</li>
 					</ul>
 				</div>
-			</header>
+			</header> --}}
 
 
 				<div class="container" style="margin-top: 10%;">
@@ -209,9 +209,9 @@
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 									<div class="block text">
 										<div class="block-content">
-											<a href="index.html" class="logo-footer">
+											{{-- <a href="index.html" class="logo-footer">
 												<img src="{{ asset('frontend') }}/img/logo-2.png" alt="Logo">
-											</a>
+											</a> --}}
 
 											<div class="contact">
 												<div class="item d-flex">
@@ -295,7 +295,7 @@
 								</div>
 
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-									<div class="block newsletter">
+									{{-- <div class="block newsletter">
 										<h2 class="block-title">Newsletter</h2>
 
 										<div class="block-content">
@@ -305,9 +305,9 @@
 												<button type="submit" class="btn btn-primary">Subscribe</button>
 											</form>
 										</div>
-									</div>
+									</div> --}}
 
-									<div class="block social">
+									{{-- <div class="block social">
 										<h2 class="block-title">Follow Us</h2>
 
 										<div class="block-content">
@@ -318,7 +318,7 @@
 												<li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
 											</ul>
 										</div>
-									</div>
+									</div> --}}
 								</div>
 							</div>
 						</div>
@@ -371,7 +371,7 @@
 				</div>
 
 				<!-- Copyright -->
-				<div class="footer-copyright">
+				{{-- <div class="footer-copyright">
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
@@ -386,7 +386,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 			</footer>
 
 			<!-- Go Up button -->

@@ -59,12 +59,12 @@
                          <span class="badge badge-pill badge-danger">Deactive</span>
                          @endif
                         </td>
-                        <td>
+                        <td style="display: flex">
 
-                            <a href="{{ route('edit.product', $item->id) }}"
+                            <a  href="{{ route('edit.product', $item->id) }}"
                                 class="btn btn-success"><i class="fa fa-edit"></i></a>
 
-                            <a href="{{ route('delete.product', $item->id) }}"
+                            <a style="margin-left:6px " href="{{ route('delete.product', $item->id) }}"
                                 class="btn btn-danger" id="#"><i class="fa fa-trash"></i></a>
                                 @if($item->status == 1)
                                 <a href="{{ route('product.deactive',$item->id) }}" class="btn btn-danger" title="Product Deactive Now">DeActive </a>

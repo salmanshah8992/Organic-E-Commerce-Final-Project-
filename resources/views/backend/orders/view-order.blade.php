@@ -63,8 +63,8 @@
                                 <strong>Name:</strong> {{ $order->user->name }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Phone:</strong>
-                                {{ $order->user->phone }}
+                                <strong>Transaction ID:</strong>
+                                {{ $order->notes }}
                             </li>
                             <li class="list-group-item">
                                 <strong>Payment By:</strong>

@@ -114,7 +114,7 @@ class CheckoutController extends Controller
     public function SubcategoryProduct($id)
     {
         $subcategory = Subcategory::find($id);
-        $products = Product::where('subcategory_id', $id)->get();
+        $products = Product::where('subcategory_id', $id)->where('status',1)->get();
         $products_count = Product::where('subcategory_id', $id)->count();
         return view('frontend.subcategory_product', compact('products', 'subcategory','products_count'));
     }
@@ -122,7 +122,7 @@ class CheckoutController extends Controller
     public function CategoryProduct($id)
     {
         $category = Category::find($id);
-        $products = Product::where('category_id', $id)->get();
+        $products = Product::where('category_id', $id)->where('status',1)->get();
         $products_count = Product::where('category_id', $id)->count();
         return view('frontend.category_product', compact('products', 'category','products_count'));
     }

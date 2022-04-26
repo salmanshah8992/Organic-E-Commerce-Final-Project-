@@ -136,8 +136,7 @@ class AdminController extends Controller
     // chart ... bar chart
     public function barChart()
     {
-        $totalSale = Order::where('status', '2')
-            ->whereYear("created_at", date("Y"))
+        $totalSale = Order::whereYear("created_at", date("Y"))
             ->select(
                 DB::raw("(count(status)) as total "),
                 DB::raw("(DATE_FORMAT(created_at, '%m')) as my_date ")
@@ -149,6 +148,7 @@ class AdminController extends Controller
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m')"))
             ->pluck('total', 'my_date');
 
+            // dd($totalSale);
         return response($totalSale);
     }
 

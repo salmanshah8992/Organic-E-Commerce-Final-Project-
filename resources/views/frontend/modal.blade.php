@@ -40,7 +40,7 @@ aria-hidden="true">
                             </select>
                         </div>
                         <div class="form-group" id="sizeArea">
-                            <label for="size">Select Size</label>
+                            <label for="size">Select Amount</label>
                             <select class="form-control" id="size" name="size">
                             </select>
                         </div>

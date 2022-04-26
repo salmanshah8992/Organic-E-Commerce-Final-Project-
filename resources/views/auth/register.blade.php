@@ -36,7 +36,7 @@
 	<body class="home home-1">
 		<div id="all">
 			<!-- Header -->
-            <header id="header">
+            {{-- <header id="header">
 				<!-- Topbar -->
 				<div class="topbar">
 					<!-- Close Topbar -->
@@ -150,15 +150,7 @@
 					<ul class="menu">
 						<li class="dropdown">
 							<a href="index.html" title="Homepage">Home</a>
-							<div class="dropdown-menu">
-								<ul>
-									<li><a href="index.html" title="Homepage 1">Homepage 1</a></li>
-									<li><a href="home-2.html" title="Homepage 2">Homepage 2</a></li>
-									<li><a href="home-3.html" title="Homepage 3">Homepage 3</a></li>
-									<li><a href="home-4.html" title="Homepage 4">Homepage 4</a></li>
-									<li><a href="home-5.html" title="Homepage 5">Homepage 5</a></li>
-								</ul>
-							</div>
+
 						</li>
 
 						<li>
@@ -170,7 +162,7 @@
 						</li>
 					</ul>
 				</div>
-			</header>
+			</header> --}}
 
             <div class="container" style="margin-top: 5%;">
                 <div class="register-page">
@@ -183,17 +175,17 @@
                             @csrf
                             <div class="form-group">
                                 <label>Name</label>
-                                <input id="name" type="text" value="" name="name">
+                                <input pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Please enter on alphabets only maximum 15 characters. ')" maxlength="15" id="name" type="text" value="" name="name" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Email</label>
-                                <input id="email" type="email" value="" name="email">
+                                <input id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" oninvalid="setCustomValidity('Please enter on salman@gmail.com format ')" maxlength="15" type="email" value="" name="email">
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label>
-                                <input id="password" type="password" value="" name="password">
+                                <input id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" oninvalid="setCustomValidity('Must contain at least one  number and one uppercase and lowercase letter, and at least 8 maximum 15 characters ')" type="password" value="" name="password">
                             </div>
 
                             <div class="form-group">
@@ -218,9 +210,9 @@
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 									<div class="block text">
 										<div class="block-content">
-											<a href="index.html" class="logo-footer">
+											{{-- <a href="index.html" class="logo-footer">
 												<img src="{{ asset('frontend') }}/img/logo-2.png" alt="Logo">
-											</a>
+											</a> --}}
 
 											<div class="contact">
 												<div class="item d-flex">
@@ -303,7 +295,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+								{{-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 									<div class="block newsletter">
 										<h2 class="block-title">Newsletter</h2>
 
@@ -328,7 +320,7 @@
 											</ul>
 										</div>
 									</div>
-								</div>
+								</div> --}}
 							</div>
 						</div>
 					</div>
@@ -379,7 +371,7 @@
 					</div>
 				</div>
 
-				<!-- Copyright -->
+				{{-- <!-- Copyright -->
 				<div class="footer-copyright">
 					<div class="container">
 						<div class="row">
@@ -395,7 +387,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 			</footer>
 
 			<!-- Go Up button -->

@@ -174,7 +174,7 @@
                                 <div role="tabpanel" class="tab-pane fade in active" id="featured">
                                     <div class="products owl-theme owl-carousel">
                                         @php
-                                            $products = App\Models\Admin\Product::where('featured','1')->get();
+                                            $products = App\Models\Admin\Product::where('featured','1')->where('status',1)->get();
                                         @endphp
                                         @foreach ($products as $product)
                                         <div class="product-item">
@@ -228,7 +228,7 @@
                                 <div role="tabpanel" class="tab-pane fade" id="specialDeal">
                                     <div class="products owl-theme owl-carousel">
                                         @php
-                                             $products = App\Models\Admin\Product::where('special_deals','1')->get();
+                                             $products = App\Models\Admin\Product::where('special_deals','1')->where('status',1)->get();
                                         @endphp
                                             @foreach ($products as $product)
                                             <div class="product-item">
@@ -301,7 +301,7 @@
                                 <div class="block-content">
                                     <div class="products owl-theme owl-carousel">
                                         @php
-                                            $fruits = App\Models\Admin\Product::where('subcategory_id','35')->limit(4)->get();
+                                            $fruits = App\Models\Admin\Product::where('subcategory_id','35')->where('status',1)->limit(4)->get();
                                         @endphp
                                         @foreach ($fruits as $fruit)
                                             <div class="product-item">
@@ -351,7 +351,7 @@
                                 </div>
 
                                 @php
-                                    $honeys = App\Models\Admin\Product::where('subcategory_id','43')->limit(4)->get();
+                                    $honeys = App\Models\Admin\Product::where('subcategory_id','43')->where('status',1)->limit(4)->get();
                                 @endphp
 
                                 <div class="block-content">
@@ -430,7 +430,7 @@
                         <div class="block-content">
                             <div class="products owl-theme owl-carousel">
                                     @php
-                                        $recent_products = App\Models\Admin\Product::orderBy('id', 'DESC')->limit(5)->get();
+                                        $recent_products = App\Models\Admin\Product::orderBy('id', 'DESC')->where('status',1)->limit(5)->get();
                                     @endphp
                                     @foreach ($recent_products as $recent_product)
                                     <div class="product-item">

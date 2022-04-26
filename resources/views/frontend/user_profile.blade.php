@@ -8,7 +8,7 @@
             <div class="col-4">
                 <b>Name:  {{ Auth::user()->name }}</b><br>
                 <b>Email: {{ Auth::user()->email }}</b><br>
-                <b>Phone: {{ $order_phone->phone }}</b><br>
+                <b>Phone: {{ optional($order_phone)->phone }}</b><br>
             </div>
         </div><br>
         <h2 class="text-center bg-success">My Orders</h2>
@@ -46,6 +46,11 @@
                                     <td>
                                             @if ($order->status == 0)
                                             <p class="btn-sm btn-danger" style="text-align: center;">Pending</p>
+                                            <form action="{{route('user.cancel',$order->id)}}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-success">Cancel Order</button>
+                                               
+                                            </form>
                                             @elseif ($order->status == 1)
                                             <p class="btn-sm btn-primary" style="text-align: center;">Processing</p>
                                             @elseif ($order->status == 2)

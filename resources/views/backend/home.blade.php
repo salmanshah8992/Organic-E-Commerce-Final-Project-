@@ -393,7 +393,7 @@
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
                     datasets: [{
-                        label: 'User registration based on month',
+                        label: 'Order Based On Month',
                         data: barArray,
                         backgroundColor: [
                             'rgba(255, 99, 132, 1)',
@@ -459,7 +459,7 @@
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
                     datasets: [{
-                        label: 'Total Number of Sale',
+                        label: 'Total Number of Registered User',
                         data: lineArray,
                         backgroundColor: [
                             'rgba(255, 99, 132, 1)',
